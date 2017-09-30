@@ -1,0 +1,13 @@
+function mentrop_prepare2(fn)
+global pox poy poz xpo ypo zp0 zp1 zps potp potm pgam
+global ftlength ftvol ftmass ftjpar ftjperp ftemag ftekin
+global ftethe pmaxft pminft zmaxft zminft bminft bbaseft
+global xfin1 yfin1 zfin1 bzfin1 dist1
+
+time=mentrop_read3(fn);
+pname=['mentrop',int2str(fn),'.mat'];
+save(pname,'time','pox', 'poy', 'poz', 'xpo', 'ypo', 'zp0',...
+    'zp1', 'zps', 'potp', 'potm', 'pgam', 'ftlength', 'ftvol',...
+    'ftmass', 'ftjpar', 'ftjperp', 'ftemag', 'ftekin',...
+    'ftethe', 'pmaxft', 'pminft', 'zmaxft', 'zminft', 'bminft',...
+    'bbaseft', 'xfin1', 'yfin1', 'zfin1', 'bzfin1', 'dist1')
