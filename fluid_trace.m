@@ -132,12 +132,6 @@ if ~doall
         ps = size(pos2{i});
         if (ps(1) + ps(2) < 3)
             conj(i,2) = nan;
-        %checking for field line which has end
-        %out of bounds which means it went through
-        %too many boundaries i think
-%         elseif (pos2{i}(end,1) < x(2)) || (pos2{i}(end,1) > x(end-1)) ||...
-%             (pos2{i}(end,2) < y(2)) || (pos2{i}(end,2) > y(end-1))
-%             conj(i,2) = nan;
         else
             conj(i,2) = pos2{i}(end,3);
         end

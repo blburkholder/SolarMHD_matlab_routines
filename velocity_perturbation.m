@@ -2,10 +2,10 @@ function [xf,yf] = velocity_perturbation(x,y,xi,yi,tf)
 nx = length(x);
 ny = length(y);
 
-vx0 = 1.6;
-vy0 = 0.64;
-vz0 = 0.88;
-vw0 = 0;
+vx0 = 1.5;
+vy0 = 0;
+vz0 = 0;
+vw0 = 1.5;
 
 rho0 = 0.072;
 
@@ -27,43 +27,22 @@ vxprof = zeros(nx,ny);
 vyprof = zeros(nx,ny);      
 vzprof = zeros(nx,ny);  
 
-lx1=-12.0;
-lx2=12;
-cx1=-18;
-cx2=-102;
-ly1=-12;
-ly2=12;
-cy1=10;
-cy2=-56;
-lz1=-14;
-lz2=14;
-cz1=38;
-cz2=-76;
-lw1=22;
-lw2=16;
-cw1=-223;
-cw2=-353; 
-
-% lx1 = -12;
-% lx2 = 12;
-% %top right
-% cx1 = 0;
-% cx2 = -140;
-% ly1 = -12;
-% ly2 = 12;
-% %bottom left
-% cy1 = -2;
-% cy2 = -55;
-% lz1 = -12;
-% lz2 = 12;
-% %bottom right
-% cz1 = 38;
-% cz2 = -96;
-% lw1 = -12;
-% lw2 = 12;
-% %top left
-% cw1 = -40;
-% cw2 = -96;    
+lx1 = -12;
+lx2 = 12;
+cx1 = 0;
+cx2 = -140;
+ly1 = -12;
+ly2 = 12;
+cy1 = -2;
+cy2 = -55;
+lz1 = -12;
+lz2 = 12;
+cz1 = 58;
+cz2 = -96;
+lw1 = -12;
+lw2 = 12;
+cw1 = -40;
+cw2 = -96;   
 
 for iy = 1:ny
     for ix = 1:nx
@@ -130,24 +109,25 @@ for iy = 1:ny
 end
 
 %this shows that the velocity is divergence free
-% div = zeros(nx-2,ny-2);
-% for i = 2:nx-1
-%     for j = 2:ny-1
-%         div(i-1,j-1) = vxprof(i+1,j) - vxprof(i-1,j) + vyprof(i,j+1) - vyprof(i,j-1);
-%     end
-% end
-% figure
-% pcolor(div)
-% shading interp
-% colorbar
+div = zeros(nx-2,ny-2);
+for i = 2:nx-1
+    for j = 2:ny-1
+        div(i-1,j-1) = vxprof(i+1,j) - vxprof(i-1,j) + vyprof(i,j+1) - vyprof(i,j-1);
+    end
+end
+figure
+pcolor(div)
+shading interp
+colorbar
 
-% figure
-% colormap(jet)
-% pcolor(x,y,(vy.^2 + vx.^2)');
-% shading interp
-% hold on
-% h = streamslice(x,y,vx',vy');
-% set(h,'Color','k')
+figure
+colormap(jet)
+pcolor(x,y,(vy.^2 + vx.^2));
+shading interp
+hold on
+h = streamslice(x,y,vx',vy');
+set(h,'Color','k')
+daspect([1 1 1])
 
 %hold on
 start_point = [xi(:),yi(:)];
@@ -177,7 +157,7 @@ for k = 1:2
     nstep = 1;
     dt = tf - t;
 end
-scatter(start_point(:,2),start_point(:,1),10,'rp')
+%scatter(start_point(:,2),start_point(:,1),10,'rp')
 %title(['tf = ', num2str(t)])
 %daspect([1,1,1])
 xf = reshape(start_point(:,1),[size(xi)])';

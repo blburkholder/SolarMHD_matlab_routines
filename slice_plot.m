@@ -1,7 +1,6 @@
 %clear all
 
 %magnetic field lines solid color
-
 re = 5;
 % figure
 %hold on
@@ -142,91 +141,16 @@ set(h,'edgecolor','none');
 colorbar
 %}
 
-%current_density
-%%%%%%%%%%%%%%%%%%%%%this is how antonius does it%%%%%%%%%%%%%%%%%%%%
-
-% jx = zeros(nx,ny,nz);
-% jy = zeros(nx,ny,nz);
-% jz = zeros(nx,ny,nz);
-% bjx = zeros(nx,ny,nz);
-% bjy = zeros(nx,ny,nz);
-% bjz = zeros(nx,ny,nz);
-% for ix = 1:nx
-%     for iy = 1:ny
-%         for iz = 1:nz
-%             bjx(ix,iy,iz) = bx(ix,iy,iz) - b0x(ix,iy,iz);
-%             bjy(ix,iy,iz) = by(ix,iy,iz) - b0y(ix,iy,iz);
-%             bjz(ix,iy,iz) = bz(ix,iy,iz) - b0z(ix,iy,iz);
-%         end
-%     end
-% end
-% for ix = 2:nx-1
-%     for iy = 2:ny-1
-%         for iz = 2:nz-1
-%             jx(ix,iy,iz) = dify(iy)*(bjz(ix,iy+1,iz)-bjz(ix,iy-1,iz)) -...
-%                 difz(iz)*(bjy(ix,iy,iz+1)-bjy(ix,iy,iz-1));
-%             jy(ix,iy,iz) = difz(iz)*(bjx(ix,iy,iz+1)-bjx(ix,iy,iz-1)) -...
-%                 difx(ix)*(bjz(ix+1,iy,iz)-bjz(ix-1,iy,iz));
-%             jz(ix,iy,iz) = difx(ix)*(bjy(ix+1,iy,iz)-bjy(ix-1,iy,iz)) -...
-%                 dify(iy)*(bjx(ix,iy+1,iz)-bjx(ix,iy-1,iz));
-%         end
-%     end
-% end
-%}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%{
-jx1 = zeros(nx,ny,nz);
-jy1 = zeros(nx,ny,nz);
-jz1 = zeros(nx,ny,nz);
-for ix = 2:nx-1
-    for iy = 2:ny-1
-        for iz = 2:nz-1
-            jx1(ix,iy,iz) = dify(iy)*(bz(ix,iy+1,iz)-bz(ix,iy-1,iz)) -...
-                difz(iz)*(by(ix,iy,iz+1)-by(ix,iy,iz-1));
-            jy1(ix,iy,iz) = difz(iz)*(bx(ix,iy,iz+1)-bx(ix,iy,iz-1)) -...
-                difx(ix)*(bz(ix+1,iy,iz)-bz(ix-1,iy,iz));
-            jz1(ix,iy,iz) = difx(ix)*(by(ix+1,iy,iz)-by(ix-1,iy,iz)) -...
-                dify(iy)*(bx(ix,iy+1,iz)-bx(ix,iy-1,iz));
-        end
-    end
-end
-
-jx2 = zeros(nx,ny,nz);
-jy2 = zeros(nx,ny,nz);
-jz2 = zeros(nx,ny,nz);
-for ix = 2:nx-1
-    for iy = 2:ny-1
-        for iz = 2:nz-1
-            jx2(ix,iy,iz) = dify(iy)*(b0z(ix,iy+1,iz)-b0z(ix,iy-1,iz)) -...
-                difz(iz)*(b0y(ix,iy,iz+1)-b0y(ix,iy,iz-1));
-            jy2(ix,iy,iz) = difz(iz)*(b0x(ix,iy,iz+1)-b0x(ix,iy,iz-1)) -...
-                difx(ix)*(b0z(ix+1,iy,iz)-b0z(ix-1,iy,iz));
-            jz2(ix,iy,iz) = difx(ix)*(b0y(ix+1,iy,iz)-b0y(ix-1,iy,iz)) -...
-                dify(iy)*(b0x(ix,iy+1,iz)-b0x(ix,iy-1,iz));
-        end
-    end
-end
-%}
-
-%parallel electric fields
-%{
-e_ll = zeros(nx,ny,nz);
-for ix = 2:nx-1
-    for iy = 2:ny-1
-        for iz = 2:nz-1
-            e_ll(ix,iy,iz) = res(ix,iy,iz)*(jx(ix,iy,iz)*bx(ix,iy,iz) +...
-                jy(ix,iy,iz)*by(ix,iy,iz) + jz(ix,iy,iz)*bz(ix,iy,iz))/...
-                sqrt(bx(ix,iy,iz)^2 + by(ix,iy,iz)^2 + bz(ix,iy,iz)^2); 
-        end
-    end
-end
-%}
+% current density + P
+% 1 parallel electric field
+% 2 field aligned current
+% 3 perpendicular current
+%[jx,jy,jz,P] = get_j(nx,ny,nz,bx,by,bz,b0x,b0y,b0z,res,difx,dify,difz,0);
 
 %specific entropy
 %sp_ent = p./(rho).^(5/3);
  
 %electric field
-
 % ex = zeros(nx,ny,nz);
 % ey = zeros(nx,ny,nz);
 % ez = zeros(nx,ny,nz);
@@ -240,7 +164,7 @@ end
 %     end
 % end
 % %}
-% 
+
 % %E cross B perturbation
 % ExB_px = zeros(nx,ny,nz);
 % ExB_py = zeros(nx,ny,nz);
@@ -255,29 +179,8 @@ end
 %     end
 % end
 
-
 %generator?
 %edj = ex.*jx + ey.*jy + ez.*jz;
-
-%Field aligned current
-%{
-fac = zeros(nx,ny,nz);
-%fac1 = zeros(nx,ny,nz);
-%fac2 = zeros(nx,ny,nz);
-for ix = 2:nx-1
-    for iy = 2:ny-1
-        for iz = 2:nz-1
-            BBB = sqrt(bx(ix,iy,iz)^2 + by(ix,iy,iz)^2 + bz(ix,iy,iz)^2);
-            dir_bx = bx(ix,iy,iz)/BBB;
-            dir_by = by(ix,iy,iz)/BBB;
-            dir_bz = bz(ix,iy,iz)/BBB;
-            fac(ix,iy,iz) = jx(ix,iy,iz)*dir_bx + jy(ix,iy,iz)*dir_by + jz(ix,iy,iz)*dir_bz;
-            %fac1(ix,iy,iz) = jx1(ix,iy,iz)*dir_bx + jy1(ix,iy,iz)*dir_by + jz1(ix,iy,iz)*dir_bz;
-            %fac2(ix,iy,iz) = jx2(ix,iy,iz)*dir_bx + jy2(ix,iy,iz)*dir_by + jz2(ix,iy,iz)*dir_bz;
-        end
-    end
-end
-%}
 
 %%%%%%%%%%%%%%%can only do one of these at a time%%%%%%%%%%%%%%%%%%%%%%%%%
 %this one for E parallel
@@ -338,7 +241,6 @@ b1 = uicontrol('Parent',l,'Style','slider','Position',[81,0,419,23],...
 b1.Callback  = @(objHandle,~)  update_plot(x,y,fac,floor(get(objHandle,'Value'))) 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %}
-
 
 %{
 figure
