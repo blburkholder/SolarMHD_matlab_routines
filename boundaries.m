@@ -9,7 +9,7 @@
 %property which will paint bottom/top boundary
 % prop = log(abs(ftekin)+eps);
 % prop = bx(2:end-1,2:end-1,n);
-prop = ftvol;
+prop = potp+potm;
 
 %quantity to project on field lines (cannot be negative)
 fline_project = abs(sz)./rho;
@@ -22,14 +22,15 @@ project_P_onto_fline = 0;
 grad_min = 20;
 grad_max = 50;
 %field line drawing resolution
-reso = 50;
+reso = 1;
 %prop quantity maximum in case of extraneous values
 maxi = 150;
 %how many times to split the boundaries
-slines = 5;
+slines = 1;
 %where to start flines
 n = nz-1;
 
+count = 500;
 [row,col] = size(prop);
 bs = zeros(count,2);
 count = 0;
@@ -59,6 +60,14 @@ for i = 3:row-2
 end
 count
 
+center = [35,30];
+bs(1,:) = center;
+spread = 20;
+for i = 2:count
+    bs(i,:) = center + (2*spread*rand(1,2)-spread);
+end
+
+
 %use this when incorporating bottom & top boundaries
 % load('mentrop5.mat')
 % prop = bbaseft;
@@ -75,10 +84,11 @@ for j = 1:slines
     %pcolor(y(2:end-1),x(2:end-1),prop)
     %streamslice(y,x,by(:,:,n),bx(:,:,n))
     shading interp
+    colormap(jet)
     colorbar
 
-    scatter(bs((j-1)*floor(count/slines)+1:ceil(j*count/slines),2),...
-        bs((j-1)*floor(count/slines)+1:ceil(j*count/slines),1),[2],'w.')
+%     scatter(bs((j-1)*floor(count/slines)+1:ceil(j*count/slines),2),...
+%         bs((j-1)*floor(count/slines)+1:ceil(j*count/slines),1),[2],'k.')
 %     scatter3(bs((i-1)*floor(count/slines)+1:ceil(i*count/slines),2),...
 %      bs((i-1)*floor(count/slines)+1:ceil(i*count/slines),1),...
 %     z(end-1)*ones(length(bs((i-1)*floor(count/slines)+1:ceil(i*count/slines),1)),1),[2],'w.')
@@ -87,11 +97,11 @@ for j = 1:slines
         by(2:end-1,2:end-1,2:end-1),bx(2:end-1,2:end-1,2:end-1),...
         bz(2:end-1,2:end-1,2:end-1),bs((j-1)*floor(count/slines)+1:reso:ceil(j*count/slines),2),...
         bs((j-1)*floor(count/slines)+1:reso:ceil(j*count/slines),1),...
-        z(n)*ones(length(bs((j-1)*floor(count/slines)+1:reso:ceil(j*count/slines),1)),1)));
+        z(n)*ones(length(bs((j-1)*floor(count/slines)+1:reso:ceil(j*count/slines),1)),1));
 
     if project_P_onto_fline == 0
-        streamline(plines);
-        view(3)
+        %streamline(plines);
+        %view(3)
     else
         b = 0;
         q = 0;
@@ -130,14 +140,16 @@ for j = 1:slines
 %     set(flines,'Color','r');
 %     view(3)
 
-%this will put red stars at the conjugate footpoints
+% %this will put red stars at the conjugate footpoints
 %     conj = zeros(length(plines),3);
 %     for l = 1:length(plines)
 %         conj(l,1) = plines{l}(end,1);
 %         conj(l,2) = plines{l}(end,2);
 %         conj(l,3) = plines{l}(end,3);
 %     end
-%     scatter3(conj(:,1),conj(:,2),conj(:,3),'rp')
+%     hold on
+%     %scatter3(conj(:,1),conj(:,2),conj(:,3),'rp')
+%     scatter(conj(:,1),conj(:,2),'rp')
 
     daspect([1 1 1])
 end
