@@ -145,7 +145,7 @@ colorbar
 % 1 parallel electric field
 % 2 field aligned current
 % 3 perpendicular current
-%[jx,jy,jz,P] = get_j(nx,ny,nz,bx,by,bz,b0x,b0y,b0z,res,difx,dify,difz,0);
+%[jx,jy,jz,P] = get_j(nx,ny,nz,bx,by,bz,b0x,b0y,b0z,res,difx,dify,difz,3);
 
 %specific entropy
 %sp_ent = p./(rho).^(5/3);
@@ -200,7 +200,8 @@ colorbar
 iz = 2;
 f = figure;
 ax = axes('Parent',f);
-r = sx(1:re:end,1:re:end,iz);
+rr = p./(bx.^2+by.^2+bz.^2);
+r = rr(1:re:end,1:re:end,iz);
 %r = reshape(r(:), [nx ny]);
 %h = pcolor(ax,y,x,log10(r'));
 h = pcolor(ax,y(1:re:end),x(1:re:end),r);
@@ -210,7 +211,7 @@ colorbar
 b = uicontrol('Parent',f,'Style','slider','Position',[81,0,419,23],...
               'value',iz, 'min',2, 'max',nz-1);
 set(b, 'SliderStep', [1/(nz-1) , 10/(nz-1) ]);
-b.Callback  = @(objHandle,~)  update_plot4(y(1:re:end),x(1:re:end),sx(1:re:end,1:re:end,:),get(objHandle,'Value'),ny,nx)
+b.Callback  = @(objHandle,~)  update_plot4(y(1:re:end),x(1:re:end),rr(1:re:end,1:re:end,:),get(objHandle,'Value'),ny,nx)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %{
 bzz = bz;

@@ -1,7 +1,7 @@
-load('mentrop10_t.mat')
+load('mentrop2_t.mat')
 
 %property which will paint bottom/top boundary
-prop = potp+potm;
+prop = ftmass;
 
 %prop quantity maximum in case of extraneous values
 maxi = 150;
@@ -12,7 +12,7 @@ count = 500;
 [row,col] = size(prop);
 bs = zeros(count,2);
 
-center = [35,70];
+center = [45,80];
 bs(1,:) = center;
 spread = 10;
 for i = 2:count
@@ -31,8 +31,11 @@ colormap(jet)
 colorbar
 scatter(bs(:,2),bs(:,1),[2],'k.')
 
-load('mentrop10.mat')
-prop = potp+potm;
+load('mentrop2.mat')
+prop = zfin1;
+prop(prop > maxi) = maxi;
+prop(prop < -maxi) = -maxi;
+prop = prop/max(max(prop));
 figure
 hold on
 pcolor(ypo,xpo,prop)

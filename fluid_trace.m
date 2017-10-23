@@ -19,7 +19,7 @@ load('flt0.mat')
 load('mhd0.mat')
 
 %reolution
-reso = 5;
+reso = 1;
 %stay away from boundaries
 off = 5;
 
