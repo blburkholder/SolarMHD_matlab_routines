@@ -141,29 +141,12 @@ set(h,'edgecolor','none');
 colorbar
 %}
 
-% current density + P
-% 1 parallel electric field
-% 2 field aligned current
-% 3 perpendicular current
-%[jx,jy,jz,P] = get_j(nx,ny,nz,bx,by,bz,b0x,b0y,b0z,res,difx,dify,difz,3);
+%[jx,jy,jz] = get_j(nx,ny,nz,bx,by,bz,b0x,b0y,b0z,difx,dify,difz);
+%[e_par,j_par,j_perp,ex,ey,ez] = get_j2(nx,ny,nz,res,jx,jy,jz,bx,by,bz,sx,sy,sz,rho)
 
 %specific entropy
 %sp_ent = p./(rho).^(5/3);
  
-%electric field
-% ex = zeros(nx,ny,nz);
-% ey = zeros(nx,ny,nz);
-% ez = zeros(nx,ny,nz);
-% for ix = 2:nx-1
-%     for iy = 2:ny-1
-%         for iz = 2:nz-1
-%             ex(ix,iy,iz) = res(ix,iy,iz)*jx(ix,iy,iz) - (sy(ix,iy,iz)*bz(ix,iy,iz) - sz(ix,iy,iz)*by(ix,iy,iz))/rho(ix,iy,iz);
-%             ey(ix,iy,iz) = res(ix,iy,iz)*jy(ix,iy,iz) - (sz(ix,iy,iz)*bx(ix,iy,iz) - sx(ix,iy,iz)*bz(ix,iy,iz))/rho(ix,iy,iz);
-%             ez(ix,iy,iz) = res(ix,iy,iz)*jz(ix,iy,iz) - (sx(ix,iy,iz)*by(ix,iy,iz) - sy(ix,iy,iz)*bx(ix,iy,iz))/rho(ix,iy,iz);
-%         end
-%     end
-% end
-% %}
 
 % %E cross B perturbation
 % ExB_px = zeros(nx,ny,nz);
