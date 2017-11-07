@@ -19,35 +19,35 @@ for i = 1:length(nulls)
     %     xx = x(194:200); 
     %     yy = y(102:107);
 %          figure
-    %     plines = streamline(stream3(xx,yy,zz,by(102:107,194:200,2:6),...
-    %         bx(102:107,194:200,2:6),bz(102:107,194:200,2:6),spfl(:,1),spfl(:,2),spfl(:,3)));
+    %     plines = streamline(stream3(xx,yy,zz,bx(102:107,194:200,2:6),...
+    %         by(102:107,194:200,2:6),bz(102:107,194:200,2:6),spfl(:,1),spfl(:,2),spfl(:,3)));
     %     hold on
-    %     flines = streamline(stream3(xx,yy,zz,-by(102:107,194:200,2:6),...
-    %         -bx(102:107,194:200,2:6),-bz(102:107,194:200,2:6),spfl(:,1),spfl(:,2),spfl(:,3)));
+    %     flines = streamline(stream3(xx,yy,zz,-bx(102:107,194:200,2:6),...
+    %         -by(102:107,194:200,2:6),-bz(102:107,194:200,2:6),spfl(:,1),spfl(:,2),spfl(:,3)));
     %     set(flines,'Color','r');
     %     isosurface(xx,yy,zz,e_ll(102:107,194:200,2:6),0.03)
     %     isosurface(xx,yy,zz,e_ll(102:107,194:200,2:6),-0.03)
     %     isosurface(xx,yy,zz,e_ll(102:107,194:200,2:6),0.05)
     %     isosurface(xx,yy,zz,e_ll(102:107,194:200,2:6),-0.05)
 
-%     plines = streamline(stream3(y(2:end-1),x(2:end-1),z(2:end-1),by(2:end-1,2:end-1,2:end-1),...
-%         bx(2:end-1,2:end-1,2:end-1),bz(2:end-1,2:end-1,2:end-1),spfl(:,1),spfl(:,2),spfl(:,3),[0.01,100]));
+%     plines = streamline(stream3(x(2:end-1),y(2:end-1),z(2:end-1),bx(2:end-1,2:end-1,2:end-1),...
+%         by(2:end-1,2:end-1,2:end-1),bz(2:end-1,2:end-1,2:end-1),spfl(:,1),spfl(:,2),spfl(:,3),[0.01,100]));
 %     hold on
-%     flines = streamline(stream3(y(2:end-1),x(2:end-1),z(2:end-1),-by(2:end-1,2:end-1,2:end-1),...
-%         -bx(2:end-1,2:end-1,2:end-1),-bz(2:end-1,2:end-1,2:end-1),spfl(:,1),spfl(:,2),spfl(:,3),[0.01,100]));
+%     flines = streamline(stream3(x(2:end-1),y(2:end-1),z(2:end-1),-bx(2:end-1,2:end-1,2:end-1),...
+%         -by(2:end-1,2:end-1,2:end-1),-bz(2:end-1,2:end-1,2:end-1),spfl(:,1),spfl(:,2),spfl(:,3),[0.01,100]));
 %   set(flines,'Color','r');
 
-        plines = streamline(stream3(y(2:end-1),x(2:end-1),z(2:end-1),by(2:end-1,2:end-1,2:end-1),...
-            bx(2:end-1,2:end-1,2:end-1),bz(2:end-1,2:end-1,2:end-1),spfl(:,1),spfl(:,2),spfl(:,3)));
+        plines = streamline(stream3(x(2:end-1),y(2:end-1),z(2:end-1),bx(2:end-1,2:end-1,2:end-1),...
+            by(2:end-1,2:end-1,2:end-1),bz(2:end-1,2:end-1,2:end-1),spfl(:,1),spfl(:,2),spfl(:,3)));
         hold on
-        flines = streamline(stream3(y(2:end-1),x(2:end-1),z(2:end-1),-by(2:end-1,2:end-1,2:end-1),...
-            -bx(2:end-1,2:end-1,2:end-1),-bz(2:end-1,2:end-1,2:end-1),spfl(:,1),spfl(:,2),spfl(:,3)));
+        flines = streamline(stream3(x(2:end-1),y(2:end-1),z(2:end-1),-bx(2:end-1,2:end-1,2:end-1),...
+            -by(2:end-1,2:end-1,2:end-1),-bz(2:end-1,2:end-1,2:end-1),spfl(:,1),spfl(:,2),spfl(:,3)));
         set(flines,'Color','r');
     end
 end
-%     isosurface(y(2:end-1),x(2:end-1),z(2:end-1),rho(2:end-1,2:end-1,2:end-1),0.1)
+%     isosurface(x(2:end-1),y(2:end-1),z(2:end-1),rho(2:end-1,2:end-1,2:end-1),0.1)
 %     a=camlight('right');
-%    pcolor(y(2:end-1),x(2:end-1),bx(2:end-1,2:end-1,1).^2+by(2:end-1,2:end-1,1).^2)
+%    pcolor(x(2:end-1),y(2:end-1),bx(2:end-1,2:end-1,1).^2+by(2:end-1,2:end-1,1).^2)
 %    shading interp
 ftvol(ftvol > 300) = 300;
 %ftjpar(ftjpar < -100) = median(median(ftjpar));

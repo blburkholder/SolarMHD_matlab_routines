@@ -30,18 +30,18 @@ function [dbx,dby,dbz,poynt] = magn_perturb(bx,by,bz,rho,xpo,ypo,zp1,xfin1,yfin1
     % vy = interp3(y,x,z,sy./rho,mod(yfin1,y(end-1)),mod(xfin1,x(end-1)),z(n)*ones(size(zfin1)));
 
     %IM PRETTY SURE THIS IS THE RIGHT WAY TO MOD THE COORDINATES
-    bbz = interp3(y,x,z,bz,yyfin,xxfin,z(n)*ones(size(zfin1)));
-    bby = interp3(y,x,z,by,yyfin,xxfin,z(n)*ones(size(zfin1)));
-    bbx = interp3(y,x,z,bx,yyfin,xxfin,z(n)*ones(size(zfin1)));
+    bbz = interp3(y,x,z,bz,xxfin,yyfin,z(n)*ones(size(zfin1)));
+    bby = interp3(y,x,z,by,xxfin,yyfin,z(n)*ones(size(zfin1)));
+    bbx = interp3(y,x,z,bx,xxfin,yyfin,z(n)*ones(size(zfin1)));
 
-    eex = interp3(y,x,z,ex,yyfin,xxfin,z(n)*ones(size(zfin1)));
-    eey = interp3(y,x,z,ey,yyfin,xxfin,z(n)*ones(size(zfin1)));
-    eez = interp3(y,x,z,ez,yyfin,xxfin,z(n)*ones(size(zfin1)));
+    eex = interp3(y,x,z,ex,xxfin,yyfin,z(n)*ones(size(zfin1)));
+    eey = interp3(y,x,z,ey,xxfin,yyfin,z(n)*ones(size(zfin1)));
+    eez = interp3(y,x,z,ez,xxfin,yyfin,z(n)*ones(size(zfin1)));
 
-    VVa = interp3(y,x,z,Va,yyfin,xxfin,z(n)*ones(size(zfin1)));
-    vx = interp3(y,x,z,sx./rho,yyfin,xxfin,z(n)*ones(size(zfin1)));
-    vy = interp3(y,x,z,sy./rho,yyfin,xxfin,z(n)*ones(size(zfin1)));
-    vz = interp3(y,x,z,sz./rho,yyfin,xxfin,z(n)*ones(size(zfin1)));
+    VVa = interp3(y,x,z,Va,xxfin,yyfin,z(n)*ones(size(zfin1)));
+    vx = interp3(y,x,z,sx./rho,xxfin,yyfin,z(n)*ones(size(zfin1)));
+    vy = interp3(y,x,z,sy./rho,xxfin,yyfin,z(n)*ones(size(zfin1)));
+    vz = interp3(y,x,z,sz./rho,xxfin,yyfin,z(n)*ones(size(zfin1)));
 
     dbx = vx.*(bbx.^2 + bby.^2 + bbz.^2)./VVa;
     dby = vy.*(bbx.^2 + bby.^2 + bbz.^2)./VVa;

@@ -122,13 +122,13 @@ for k = 1:8 %cut the volume into 8 subvolumes for speed
         end
         %figure
         %using 50% of available triangles
-        p1 = patch(isosurface(yy,xx,zz,bly,0),'visible','off');
+        p1 = patch(isosurface(xx,yy,zz,bly,0),'visible','off');
         p1 = reducepatch(p1,0.8);
         %p1.EdgeColor = 'red';
-        p2 = patch(isosurface(yy,xx,zz,blx,0),'visible','off');
+        p2 = patch(isosurface(xx,yy,zz,blx,0),'visible','off');
         p2 = reducepatch(p2,0.8);
         %p2.EdgeColor = 'blue';
-        p3 = patch(isosurface(yy,xx,zz,blz,0),'visible','off');
+        p3 = patch(isosurface(xx,yy,zz,blz,0),'visible','off');
         p3 = reducepatch(p3,0.8);
         %p3.EdgeColor = 'green';
 
@@ -190,14 +190,14 @@ for k = 1:8 %cut the volume into 8 subvolumes for speed
 
         if ~isempty(sv1)
             o1 = 0;
-            c1 = interp3(yy,xx,zz,blz,sv1(1,1),sv1(1,2),sv1(1,3));
+            c1 = interp3(xx,yy,zz,blz,sv1(1,1),sv1(1,2),sv1(1,3));
             if c1 > 0
                 o1 = 1; 
             else
                 o1 = -1;
             end
             for i = 2:length(sv1)
-                c2 = interp3(yy,xx,zz,blz,sv1(i,1),sv1(i,2),sv1(i,3));
+                c2 = interp3(xx,yy,zz,blz,sv1(i,1),sv1(i,2),sv1(i,3));
                 if c2 > 0
                     o2 = 1;
                 elseif c2 < 0
@@ -212,7 +212,7 @@ for k = 1:8 %cut the volume into 8 subvolumes for speed
                         sl = abs(c1/bz_dif);
                         v = sv1(i,:) - sv1(i-1,:);
                         r = sv1(i-1,:) + sl*v;
-                        bbbz = interp3(yy,xx,zz,blz,r(1),r(2),r(3));
+                        bbbz = interp3(xx,yy,zz,blz,r(1),r(2),r(3));
                         %scatter3(r(1),r(2),r(3))
                         if abs(bbbz) < 0.1
                             nulls(end+1,:) = r;
@@ -226,14 +226,14 @@ for k = 1:8 %cut the volume into 8 subvolumes for speed
 
         if ~isempty(sv2)
             o1 = 0;
-            c1 = interp3(yy,xx,zz,blx,sv2(1,1),sv2(1,2),sv2(1,3));
+            c1 = interp3(xx,yy,zz,blx,sv2(1,1),sv2(1,2),sv2(1,3));
             if c1 > 0
                 o1 = 1; 
             else
                 o1 = -1;
             end
             for i = 2:length(sv2)
-                c2 = interp3(yy,xx,zz,blx,sv2(i,1),sv2(i,2),sv2(i,3));
+                c2 = interp3(xx,yy,zz,blx,sv2(i,1),sv2(i,2),sv2(i,3));
                 if c2 > 0
                     o2 = 1;
                 elseif c2 < 0
@@ -248,7 +248,7 @@ for k = 1:8 %cut the volume into 8 subvolumes for speed
                         sl = abs(c1/bx_dif);
                         v = sv2(i,:) - sv2(i-1,:);
                         r = sv2(i-1,:) + sl*v;
-                        bbbx = interp3(yy,xx,zz,blx,r(1),r(2),r(3));
+                        bbbx = interp3(xx,yy,zz,blx,r(1),r(2),r(3));
                         if abs(bbbx) < 0.1
                             nulls(end+1,:) = r;
                         end
@@ -261,14 +261,14 @@ for k = 1:8 %cut the volume into 8 subvolumes for speed
 
         if ~isempty(sv3)
             o1 = 0;
-            c1 = interp3(yy,xx,zz,bly,sv3(1,1),sv3(1,2),sv3(1,3));
+            c1 = interp3(xx,yy,zz,bly,sv3(1,1),sv3(1,2),sv3(1,3));
             if c1 > 0
                 o1 = 1; 
             else
                 o1 = -1;
             end
             for i = 2:length(sv3)
-                c2 = interp3(yy,xx,zz,bly,sv3(i,1),sv3(i,2),sv3(i,3));
+                c2 = interp3(xx,yy,zz,bly,sv3(i,1),sv3(i,2),sv3(i,3));
                 if c2 > 0
                     o2 = 1;
                 elseif c2 < 0
@@ -283,7 +283,7 @@ for k = 1:8 %cut the volume into 8 subvolumes for speed
                         sl = abs(c1/by_dif);
                         v = sv3(i,:) - sv3(i-1,:);
                         r = sv3(i-1,:) + sl*v;
-                        bbby = interp3(yy,xx,zz,bly,r(1),r(2),r(3));
+                        bbby = interp3(xx,yy,zz,bly,r(1),r(2),r(3));
                         if abs(bbby) < 0.1
                             nulls(end+1,:) = r;
                         end

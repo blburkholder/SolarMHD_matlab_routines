@@ -63,34 +63,34 @@ hi='int64'; rl='float32'; it='int32';
        nv=nx*ny*nz;        
 %line 3 read
            hr1 = fread(fid,1,hi);
-            bx = fread(fid,nv,rl); bx = reshape(bx,nx,ny,nz); fprintf(['bx, ']);
-            by = fread(fid,nv,rl); by = reshape(by,nx,ny,nz); fprintf(['by, ']);
-            bz = fread(fid,nv,rl); bz = reshape(bz,nx,ny,nz); fprintf(['bz, ']);
+            bx = fread(fid,nv,rl); bx = reshape(bx,nx,ny,nz); fprintf(['bx, ']); bx = permute(bx, [2 1 3]);
+            by = fread(fid,nv,rl); by = reshape(by,nx,ny,nz); fprintf(['by, ']); by = permute(by, [2 1 3]);
+            bz = fread(fid,nv,rl); bz = reshape(bz,nx,ny,nz); fprintf(['bz, ']); bz = permute(bz, [2 1 3]);
            hr2 = fread(fid,1,hi);
 %line 4 read
            hr1 = fread(fid,1,hi);
-            b0x = fread(fid,nv,rl);  b0x = reshape(b0x,nx,ny,nz); fprintf(['b0x, ']);
-            b0y = fread(fid,nv,rl);  b0y = reshape(b0y,nx,ny,nz); fprintf(['b0y, ']);
-            b0z = fread(fid,nv,rl);  b0z = reshape(b0z,nx,ny,nz); fprintf(['b0z, ']);
+            b0x = fread(fid,nv,rl);  b0x = reshape(b0x,nx,ny,nz); fprintf(['b0x, ']); b0x = permute(b0x, [2 1 3]);
+            b0y = fread(fid,nv,rl);  b0y = reshape(b0y,nx,ny,nz); fprintf(['b0y, ']); b0y = permute(b0y, [2 1 3]);
+            b0z = fread(fid,nv,rl);  b0z = reshape(b0z,nx,ny,nz); fprintf(['b0z, ']); b0z = permute(b0z, [2 1 3]);
            hr2 = fread(fid,1,hi);
 %line 5 read
            hr1 = fread(fid,1,hi);
-            sx = fread(fid,nv,rl);  sx = reshape(sx,nx,ny,nz); fprintf(['sx, ']);
-            sy = fread(fid,nv,rl);  sy = reshape(sy,nx,ny,nz); fprintf(['sy, ']);
-            sz = fread(fid,nv,rl);  sz = reshape(sz,nx,ny,nz); fprintf(['sz, ']);
+            sx = fread(fid,nv,rl);  sx = reshape(sx,nx,ny,nz); fprintf(['sx, ']); sx = permute(sx, [2 1 3]);
+            sy = fread(fid,nv,rl);  sy = reshape(sy,nx,ny,nz); fprintf(['sy, ']); sy = permute(sy, [2 1 3]);
+            sz = fread(fid,nv,rl);  sz = reshape(sz,nx,ny,nz); fprintf(['sz, ']); sz = permute(sz, [2 1 3]);
            hr2 = fread(fid,1,hi);
 
 %line 6 read
            hr1 = fread(fid,1,hi);
-           rho  = fread(fid,nv,rl);  rho = reshape( rho,nx,ny,nz); fprintf(['rho, ']);
-             u  = fread(fid,nv,rl);    u = reshape(   u,nx,ny,nz); fprintf(['u, ']);
-           res  = fread(fid,nv,rl);  res = reshape( res,nx,ny,nz); fprintf(['res, ']);
-          prof  = fread(fid,nv,rl); prof = reshape(prof,nx,ny,nz); fprintf(['prof, ']);
+           rho  = fread(fid,nv,rl);  rho = reshape( rho,nx,ny,nz); fprintf(['rho, ']); rho = permute(rho, [2 1 3]);
+             u  = fread(fid,nv,rl);    u = reshape(   u,nx,ny,nz); fprintf(['u, ']); u = permute(u, [2 1 3]);
+           res  = fread(fid,nv,rl);  res = reshape( res,nx,ny,nz); fprintf(['res, ']); res = permute(res, [2 1 3]);
+          prof  = fread(fid,nv,rl); prof = reshape(prof,nx,ny,nz); fprintf(['prof, ']); prof = permute(prof, [2 1 3]);
             hr2 = fread(fid,1,hi);
 
 %line 7 read
            hr1 = fread(fid,1,hi);
-           lambda  = fread(fid,nv,rl);  lambda = reshape( lambda,nx,ny,nz); fprintf(['lambda. ']);
+           lambda  = fread(fid,nv,rl);  lambda = reshape( lambda,nx,ny,nz); fprintf(['lambda. ']); lambda = permute(lambda, [2 1 3]);
            hr2 = fread(fid,1,hi);
    fprintf(['\n']);
 

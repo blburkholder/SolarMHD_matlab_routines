@@ -47,9 +47,12 @@ function [e_par,j_par,j_perp,ex,ey,ez] = get_j2(nx,ny,nz,res,jx,jy,jz,bx,by,bz,s
     for ix = 2:nx-1
         for iy = 2:ny-1
             for iz = 2:nz-1
-                ex(ix,iy,iz) = res(ix,iy,iz)*jx(ix,iy,iz) - (sy(ix,iy,iz)*bz(ix,iy,iz) - sz(ix,iy,iz)*by(ix,iy,iz))/rho(ix,iy,iz);
-                ey(ix,iy,iz) = res(ix,iy,iz)*jy(ix,iy,iz) - (sz(ix,iy,iz)*bx(ix,iy,iz) - sx(ix,iy,iz)*bz(ix,iy,iz))/rho(ix,iy,iz);
-                ez(ix,iy,iz) = res(ix,iy,iz)*jz(ix,iy,iz) - (sx(ix,iy,iz)*by(ix,iy,iz) - sy(ix,iy,iz)*bx(ix,iy,iz))/rho(ix,iy,iz);
+%                 ex(ix,iy,iz) = res(ix,iy,iz)*jx(ix,iy,iz) - (sy(ix,iy,iz)*bz(ix,iy,iz) - sz(ix,iy,iz)*by(ix,iy,iz))/rho(ix,iy,iz);
+%                 ey(ix,iy,iz) = res(ix,iy,iz)*jy(ix,iy,iz) - (sz(ix,iy,iz)*bx(ix,iy,iz) - sx(ix,iy,iz)*bz(ix,iy,iz))/rho(ix,iy,iz);
+%                 ez(ix,iy,iz) = res(ix,iy,iz)*jz(ix,iy,iz) - (sx(ix,iy,iz)*by(ix,iy,iz) - sy(ix,iy,iz)*bx(ix,iy,iz))/rho(ix,iy,iz);
+                ex(ix,iy,iz) =  -(sy(ix,iy,iz)*bz(ix,iy,iz) - sz(ix,iy,iz)*by(ix,iy,iz))/rho(ix,iy,iz);
+                ey(ix,iy,iz) =  -(sz(ix,iy,iz)*bx(ix,iy,iz) - sx(ix,iy,iz)*bz(ix,iy,iz))/rho(ix,iy,iz);
+                ez(ix,iy,iz) =  -(sx(ix,iy,iz)*by(ix,iy,iz) - sy(ix,iy,iz)*bx(ix,iy,iz))/rho(ix,iy,iz);
             end
         end
     end

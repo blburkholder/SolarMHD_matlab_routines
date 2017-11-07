@@ -7,15 +7,15 @@ re = 5;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%from top of box%%%%%%%%%%%%%%%%%%%%%%%%
 %{
 [cx,cy,cz] = meshgrid(min(x):res:max(x),min(y):res:max(y),max(z));
-streamline(stream3(y,x,z,by,bx,bz,cx(:),cy(:),cz(:)));
-streamline(stream3(y,x,z,-by,-bx,-bz,cx(:),cy(:),cz(:)));
+streamline(stream3(x,y,z,bx,by,bz,cx(:),cy(:),cz(:)));
+streamline(stream3(x,y,z,-bx,-by,-bz,cx(:),cy(:),cz(:)));
 %}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%from bottom of box%%%%%%%%%%%%%%%%%%%%%%%%
 %{
 [cx,cy,cz] = meshgrid(min(x):re:max(x),min(y):re:max(y),min(z));
-h = streamline(stream3(y,x,z,by,bx,bz,cx(:),cy(:),cz(:)));
+h = streamline(stream3(x,y,z,bx,by,bz,cx(:),cy(:),cz(:)));
 set(h,'Color','g')
-h = streamline(stream3(y,x,z,-by,-bx,-bz,cx(:),cy(:),cz(:)));
+h = streamline(stream3(x,y,z,-bx,-by,-bz,cx(:),cy(:),cz(:)));
 set(h,'Color','m')
 %}
 
@@ -28,8 +28,8 @@ hold on
 colormap(jet)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%from top of box%%%%%%%%%%%%%%%%%%%%%%%%
 [cx,cy,cz] = meshgrid(min(x):res:max(x),min(y):res:max(y),max(z));
-color_stream_pos = stream3(y,x,z,by,bx,bz,cx(:),cy(:),cz(:));
-color_stream_neg = stream3(y,x,z,-by,-bx,-bz,cx(:),cy(:),cz(:));
+color_stream_pos = stream3(x,y,z,bx,by,bz,cx(:),cy(:),cz(:));
+color_stream_neg = stream3(x,y,z,-bx,-by,-bz,cx(:),cy(:),cz(:));
 maximum = max(z);
 for i = 1:length(color_stream_pos)
         try
@@ -57,8 +57,8 @@ figure
 hold on
 colormap(jet)
 [cx,cy,cz] = meshgrid(min(x):res:max(x),min(y):res:max(y),min(z));
-color_stream_pos = stream3(y,x,z,by,bx,bz,cx(:),cy(:),cz(:));
-color_stream_neg = stream3(y,x,z,-by,-bx,-bz,cx(:),cy(:),cz(:));
+color_stream_pos = stream3(x,y,z,bx,by,bz,cx(:),cy(:),cz(:));
+color_stream_neg = stream3(x,y,z,-bx,-by,-bz,cx(:),cy(:),cz(:));
 for i = 1:length(color_stream_pos)
         try
         patch([(color_stream_pos{i}(:,1))' nan],[(color_stream_pos{i}(:,2))' nan],...
@@ -83,7 +83,7 @@ end
 
 %isosurfaces of pressure
 %or whatever else by replacing p
-%h = patch(isosurface(y,x,z,p,0.1))
+%h = patch(isosurface(x,y,z,p,0.1))
 %set(h,'FaceAlpha',0.1)
 %set(h,'EdgeAlpha',0.1)
 %set(h,'EdgeColor','b')
@@ -98,7 +98,7 @@ for i = 1:length(h)
     h(i).EdgeColor = 'none';
     h(i).DiffuseStrength = 0.8;
 end
-quiver(x(1:10:end),y(1:10:end),sy(1:10:end,1:10:end,1),sx(1:10:end,1:10:end,1),'Color','w')
+quiver(x(1:10:end),y(1:10:end),sx(1:10:end,1:10:end,1),sy(1:10:end,1:10:end,1),'Color','w')
 %}
 
 %in plane 3D vector field
@@ -147,7 +147,6 @@ colorbar
 %specific entropy
 %sp_ent = p./(rho).^(5/3);
  
-
 % %E cross B perturbation
 % ExB_px = zeros(nx,ny,nz);
 % ExB_py = zeros(nx,ny,nz);
@@ -171,7 +170,7 @@ colorbar
 % iz = 2;
 % f = figure;
 % ax = axes('Parent',f);
-% h = pcolor(ax,x,y,e_ll(:,:,iz)');
+% h = pcolor(ax,x,y,e_ll(:,:,iz));
 % shading interp
 % colorbar
 % b = uicontrol('Parent',f,'Style','slider','Position',[81,0,419,23],...
@@ -203,7 +202,7 @@ bzz(find(bzz>0)) = 1;
 iz = 2;
 f = figure;
 ax = axes('Parent',f);
-h = pcolor(ax,x,y,bzz(:,:,iz)');
+h = pcolor(ax,x,y,bzz(:,:,iz));
 shading interp
 colorbar
 b = uicontrol('Parent',f,'Style','slider','Position',[81,0,419,23],...
@@ -217,7 +216,7 @@ b.Callback  = @(objHandle,~)  update_plot(x,y,bzz,get(objHandle,'Value'))
 iz = 2;
 l = figure;
 ax1 = axes('Parent',l);
-h1 = pcolor(ax1,x,y,fac(:,:,iz)');
+h1 = pcolor(ax1,x,y,fac(:,:,iz));
 shading interp
 colorbar
 b1 = uicontrol('Parent',l,'Style','slider','Position',[81,0,419,23],...

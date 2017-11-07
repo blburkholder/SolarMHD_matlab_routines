@@ -42,95 +42,91 @@ fprintf(['pox=',num2str(pox,'%4d'),' poy=',num2str(poy,'%4d'),' poz=',num2str(po
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     potp = fread(fid,pox*poy,rl); potp = reshape(potp,pox,poy);
+     potp = fread(fid,pox*poy,rl); potp = reshape(potp,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     potm = fread(fid,pox*poy,rl); potm = reshape(potm,pox,poy);
+     potm = fread(fid,pox*poy,rl); potm = reshape(potm,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     pgam = fread(fid,pox*poy,rl); pgam = reshape(pgam,pox,poy);
+     pgam = fread(fid,pox*poy,rl); pgam = reshape(pgam,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     ftlength = fread(fid,pox*poy,rl); ftlength = reshape(ftlength,pox,poy);
+     ftlength = fread(fid,pox*poy,rl); ftlength = reshape(ftlength,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     ftvol = fread(fid,pox*poy,rl); ftvol = reshape(ftvol,pox,poy);
+     ftvol = fread(fid,pox*poy,rl); ftvol = reshape(ftvol,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     ftmass = fread(fid,pox*poy,rl); ftmass = reshape(ftmass,pox,poy);
+     ftmass = fread(fid,pox*poy,rl); ftmass = reshape(ftmass,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     ftjpar = fread(fid,pox*poy,rl); ftjpar = reshape(ftjpar,pox,poy);
+     ftjpar = fread(fid,pox*poy,rl); ftjpar = reshape(ftjpar,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     ftjperp = fread(fid,pox*poy,rl); ftjperp = reshape(ftjperp,pox,poy);
+     ftjperp = fread(fid,pox*poy,rl); ftjperp = reshape(ftjperp,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     ftemag = fread(fid,pox*poy,rl); ftemag = reshape(ftemag,pox,poy);
+     ftemag = fread(fid,pox*poy,rl); ftemag = reshape(ftemag,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     ftekin = fread(fid,pox*poy,rl); ftekin = reshape(ftekin,pox,poy);
+     ftekin = fread(fid,pox*poy,rl); ftekin = reshape(ftekin,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     ftethe = fread(fid,pox*poy,rl); ftethe = reshape(ftethe,pox,poy);
+     ftethe = fread(fid,pox*poy,rl); ftethe = reshape(ftethe,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     pmaxft = fread(fid,pox*poy,rl); pmaxft = reshape(pmaxft,pox,poy);
+     pmaxft = fread(fid,pox*poy,rl); pmaxft = reshape(pmaxft,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     pminft = fread(fid,pox*poy,rl); pminft = reshape(pminft,pox,poy);
+     pminft = fread(fid,pox*poy,rl); pminft = reshape(pminft,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     zmaxft = fread(fid,pox*poy,rl); zmaxft = reshape(zmaxft,pox,poy);
+     zmaxft = fread(fid,pox*poy,rl); zmaxft = reshape(zmaxft,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     zminft = fread(fid,pox*poy,rl); zminft = reshape(zminft,pox,poy);
+     zminft = fread(fid,pox*poy,rl); zminft = reshape(zminft,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     bminft = fread(fid,pox*poy,rl); bminft = reshape(bminft,pox,poy);
+     bminft = fread(fid,pox*poy,rl); bminft = reshape(bminft,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     bbaseft = fread(fid,pox*poy,rl); bbaseft = reshape(bbaseft,pox,poy);
+     bbaseft = fread(fid,pox*poy,rl); bbaseft = reshape(bbaseft,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     xfin1 = fread(fid,pox*poy,rl); xfin1 = reshape(xfin1,pox,poy);
+     xfin1 = fread(fid,pox*poy,rl); xfin1 = reshape(xfin1,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     yfin1 = fread(fid,pox*poy,rl); yfin1 = reshape(yfin1,pox,poy);
+     yfin1 = fread(fid,pox*poy,rl); yfin1 = reshape(yfin1,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     zfin1 = fread(fid,pox*poy,rl); zfin1 = reshape(zfin1,pox,poy);
+     zfin1 = fread(fid,pox*poy,rl); zfin1 = reshape(zfin1,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     bzfin1 = fread(fid,pox*poy,rl); bzfin1 = reshape(bzfin1,pox,poy);
+     bzfin1 = fread(fid,pox*poy,rl); bzfin1 = reshape(bzfin1,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    hr1 = fread(fid,1,hi);
-     dist1 = fread(fid,pox*poy,rl); dist1 = reshape(dist1,pox,poy);
-   hr2 = fread(fid,1,hi);
-
-  hr1 = fread(fid,1,hi);
-     dist2 = fread(fid,pox*poy,rl); 
+     dist1 = fread(fid,pox*poy,rl); dist1 = reshape(dist1,pox,poy)';
    hr2 = fread(fid,1,hi);
 
    fprintf(['\n']);

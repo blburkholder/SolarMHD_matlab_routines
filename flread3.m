@@ -1,7 +1,7 @@
 function [time]=flread3(file_number);
 global nflx nfly nflz
 global fepo
-%%%%%%%%%%%THIS IS PROBABLY NOT DONE YET, NEED TO MAKE FLPREPARE3 ALSO
+
 fnh='fltkm';  fnt=num2str(file_number);
 for i=1:5
 fn=[fnh,fnt];

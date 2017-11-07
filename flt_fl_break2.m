@@ -14,10 +14,10 @@ for d = 5
     figure
     hold on
     
-    [cor_x,cor_y] = velocity_perturbation(y,x,fcoor_y,fcoor_x,time);
-    plines = perio_stream3(y(2:end-1),x(2:end-1),z(2:end-1),...
-        by(2:end-1,2:end-1,2:end-1),bx(2:end-1,2:end-1,2:end-1),...
-        bz(2:end-1,2:end-1,2:end-1),cor_y,cor_x,0*ones(size(cor_y)));
+    [cor_x,cor_y] = velocity_perturbation(x,y,fcoor_x,fcoor_y,time);
+    plines = perio_stream3(x(2:end-1),y(2:end-1),z(2:end-1),...
+        bx(2:end-1,2:end-1,2:end-1),by(2:end-1,2:end-1,2:end-1),...
+        bz(2:end-1,2:end-1,2:end-1),cor_x,cor_y,0*ones(size(cor_y)));
 
     jx = zeros(nx,ny,nz);
     jy = zeros(nx,ny,nz);
@@ -72,7 +72,7 @@ for d = 5
     end
 
     for i = 1:length(plines)
-        plines{i}(:,4) = interp3(y(2:end-1),x(2:end-1),z(2:end-1),fac(2:end-1,2:end-1,2:end-1),plines{i}(:,1),plines{i}(:,2),plines{i}(:,3));
+        plines{i}(:,4) = interp3(x(2:end-1),y(2:end-1),z(2:end-1),fac(2:end-1,2:end-1,2:end-1),plines{i}(:,1),plines{i}(:,2),plines{i}(:,3));
     end
 
     maximum = max(max(max(fac)));

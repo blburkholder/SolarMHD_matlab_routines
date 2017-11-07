@@ -32,9 +32,9 @@ coor_x = slice(:,:,1,1);
 coor_y = slice(:,:,1,2);
 coor_z = slice(:,:,1,3);
 
-pos1 = perio_stream3(y(2:end-1),x(2:end-1),z(2:end-1),by(2:end-1,2:end-1,2:end-1),...
-    bx(2:end-1,2:end-1,2:end-1),bz(2:end-1,2:end-1,2:end-1),coor_y(off:reso:end-off,off:reso:end-off),...
-    coor_x(off:reso:end-off,off:reso:end-off),...
+pos1 = perio_stream3(x(2:end-1),y(2:end-1),z(2:end-1),bx(2:end-1,2:end-1,2:end-1),...
+    by(2:end-1,2:end-1,2:end-1),bz(2:end-1,2:end-1,2:end-1),coor_x(off:reso:end-off,off:reso:end-off),...
+    coor_y(off:reso:end-off,off:reso:end-off),...
     coor_z(off:reso:end-off,off:reso:end-off));
 
 conj = zeros(length(pos1),2);
@@ -52,7 +52,7 @@ end
 figure
 cx = coor_x(off:reso:end-off,off:reso:end-off);
 cy = coor_y(off:reso:end-off,off:reso:end-off);
-h = scatter(cy(:),cx(:),[10],conj(:,1),'filled');
+h = scatter(cx(:),cy(:),[10],conj(:,1),'filled');
 colorbar
 
 if xuan
@@ -69,10 +69,10 @@ if xuan
             figure
 
             coor_z = slice(off:reso:end-off,off:reso:end-off,3);
-            pos2 = perio_stream3(y(2:end-1),x(2:end-1),z(2:end-1),...
-                by(2:end-1,2:end-1,2:end-1),bx(2:end-1,2:end-1,2:end-1),...
-                bz(2:end-1,2:end-1,2:end-1),coor_y(off:reso:end-off,off:reso:end-off),...
-                coor_x(off:reso:end-off,off:reso:end-off),coor_z);
+            pos2 = perio_stream3(x(2:end-1),y(2:end-1),z(2:end-1),...
+                bx(2:end-1,2:end-1,2:end-1),by(2:end-1,2:end-1,2:end-1),...
+                bz(2:end-1,2:end-1,2:end-1),coor_x(off:reso:end-off,off:reso:end-off),...
+                coor_y(off:reso:end-off,off:reso:end-off),coor_z);
 
             for k = 1:length(pos2)-1
                 ps = size(pos2{k});
@@ -88,12 +88,12 @@ if xuan
 
             cx = coor_x(off:reso:end-off,off:reso:end-off);
             cy = coor_y(off:reso:end-off,off:reso:end-off);
-            h = scatter(cy(:),cx(:),[10],conj(:,2),'filled');
+            h = scatter(cx(:),cy(:),[10],conj(:,2),'filled');
             colorbar
             figure
             %cx = coor_x(off:reso:end-off,off:reso:end-off);
             %cy = coor_y(off:reso:end-off,off:reso:end-off);
-            scatter(cy(:),cx(:),[10],(conj(:,2) - conj(:,1)),'filled');
+            scatter(cx(:),cy(:),[10],(conj(:,2) - conj(:,1)),'filled');
         end        
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         if i ~= files+1
@@ -113,17 +113,17 @@ figure
 if xuan
     if ~doall
         coor_z = slice(off:reso:end-off,off:reso:end-off,3);
-        pos2 = perio_stream3(y(2:end-1),x(2:end-1),z(2:end-1),...
-            by(2:end-1,2:end-1,2:end-1),bx(2:end-1,2:end-1,2:end-1),...
-            bz(2:end-1,2:end-1,2:end-1),coor_y(off:reso:end-off,off:reso:end-off),...
-            coor_x(off:reso:end-off,off:reso:end-off),coor_z);
+        pos2 = perio_stream3(x(2:end-1),y(2:end-1),z(2:end-1),...
+            bx(2:end-1,2:end-1,2:end-1),by(2:end-1,2:end-1,2:end-1),...
+            bz(2:end-1,2:end-1,2:end-1),coor_x(off:reso:end-off,off:reso:end-off),...
+            coor_y(off:reso:end-off,off:reso:end-off),coor_z);
     end
 else
     [coor_x,coor_y] = velocity_perturbation(x,y,coor_x(off:reso:end-off,off:reso:end-off),...
             coor_y(off:reso:end-off,off:reso:end-off),time);
-    pos2 = perio_stream3(y(2:end-1),x(2:end-1),z(2:end-1),...
-        by(2:end-1,2:end-1,2:end-1),bx(2:end-1,2:end-1,2:end-1),...
-        bz(2:end-1,2:end-1,2:end-1),coor_y, coor_x, 0.1*ones(size(coor_x)));
+    pos2 = perio_stream3(x(2:end-1),y(2:end-1),z(2:end-1),...
+        bx(2:end-1,2:end-1,2:end-1),by(2:end-1,2:end-1,2:end-1),...
+        bz(2:end-1,2:end-1,2:end-1),coor_x,coor_y, 0.1*ones(size(coor_x)));
 end
 
 if ~doall
@@ -142,11 +142,11 @@ if xuan
     if ~doall
         cx = coor_x(off:reso:end-off,off:reso:end-off);
         cy = coor_y(off:reso:end-off,off:reso:end-off);
-        h = scatter(cy(:),cx(:),[10],conj(:,2),'filled');
+        h = scatter(cx(:),cy(:),[10],conj(:,2),'filled');
         colorbar
     end
 else
-    pcolor(coor_y, coor_x, reshape(conj(:,2),[size(coor_x)]));
+    pcolor(coor_x,coor_y,reshape(conj(:,2),[size(coor_x)]));
     shading interp
     colorbar
 end
@@ -159,12 +159,12 @@ end
 if xuan
     cx = coor_x(off:reso:end-off,off:reso:end-off);
     cy = coor_y(off:reso:end-off,off:reso:end-off);
-    scatter(cy(:),cx(:),[10],(conj(:,2) - conj(:,1)),'filled');
+    scatter(cx(:),cy(:),[10],(conj(:,2) - conj(:,1)),'filled');
     colorbar
 else
     elg = reshape(conj(:,1),[size(coor_x)]);
     gle = reshape(conj(:,2),[size(coor_x)]);
-    pcolor(coor_y, coor_x, gle-elg');
+    pcolor(coor_x, coor_y, gle-elg');
     shading interp
     colorbar
 end
@@ -175,10 +175,10 @@ if xuan
     for i = 1:files+1
         tx = track(1:reso:end,1:reso:end,1,i);
         ty = track(1:reso:end,1:reso:end,2,i);
-        k = scatter(ty(:),tx(:),4,'k.');
+        k = scatter(tx(:),ty(:),4,'k.');
         k.LineWidth = 0.1;
     end
-    k = scatter(ty(:),tx(:),4,'rp');
+    k = scatter(tx(:),ty(:),4,'rp');
     k.LineWidth = 0.1;
 else
     slice = z1(:,:,s,:);

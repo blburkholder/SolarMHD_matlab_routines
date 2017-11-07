@@ -21,8 +21,8 @@ for j = 0:1
 
     [coor_x,coor_y] = velocity_perturbation(x,y,coor_x1(off:reso:end-off,off:reso:end-off),...
             coor_y1(off:reso:end-off,off:reso:end-off),time);
-    pos1 = perio_stream3(y(2:end-1),x(2:end-1),z(2:end-1),by(2:end-1,2:end-1,2:end-1),...
-        bx(2:end-1,2:end-1,2:end-1),bz(2:end-1,2:end-1,2:end-1),coor_y,coor_x,0*coor_x);
+    pos1 = perio_stream3(x(2:end-1),y(2:end-1),z(2:end-1),bx(2:end-1,2:end-1,2:end-1),...
+        by(2:end-1,2:end-1,2:end-1),bz(2:end-1,2:end-1,2:end-1),coor_x,coor_y,0*coor_x);
 
     for i = 1:(length(pos1)-1)
         try
@@ -36,7 +36,7 @@ for j = 0:1
         elg = reshape(conj(:,1),[size(coor_x)]);
         gle = reshape(conj(:,j+1),[size(coor_x)]);
         figure
-        pcolor(coor_y, coor_x, gle-elg);
+        pcolor(coor_x, coor_y, gle-elg);
         shading interp
         colorbar
     end

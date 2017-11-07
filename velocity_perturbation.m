@@ -3,8 +3,8 @@ nx = length(x);
 ny = length(y);
 
 vx0 = 1.6;
-vy0 = -1.6;
-vz0 = 1.6;
+vy0 = 0.64;
+vz0 = 0.88;
 vw0 = 0.00;
 
 rho0 = 0.072;
@@ -29,8 +29,8 @@ vzprof = zeros(nx,ny);
 
 lx1=-12;
 lx2=12;
-cx1=-18;
-cx2=-102;
+cx1=0;
+cx2=-92;
 ly1=-12;
 ly2=12;
 cy1=10;
@@ -120,14 +120,14 @@ end
 % shading interp
 % colorbar
 
-% figure
-% colormap(jet)
-% pcolor(x,y,(vy.^2 + vx.^2));
-% shading interp
-% hold on
-% h = streamslice(x,y,vx',vy');
-% set(h,'Color','k')
-% daspect([1 1 1])
+figure
+colormap(jet)
+pcolor(x,y,(vy'.^2 + vx'.^2));
+shading interp
+hold on
+h = streamslice(x,y,vx',vy');
+set(h,'Color','k')
+daspect([1 1 1])
 
 %hold on
 start_point = [xi(:),yi(:)];
@@ -145,8 +145,8 @@ nstep = floor(tf/dt);
 for k = 1:2
     for i = 1:nstep
 
-        vxx = interp2(x,y,vx',start_point(:,1),start_point(:,2));
-        vyy = interp2(x,y,vy',start_point(:,1),start_point(:,2));
+        vxx = interp2(x,y,vx,start_point(:,1),start_point(:,2));
+        vyy = interp2(x,y,vy,start_point(:,1),start_point(:,2));
 
         start_point(:,1) = start_point(:,1) + vxx*dt;
         start_point(:,2) = start_point(:,2) + vyy*dt;
