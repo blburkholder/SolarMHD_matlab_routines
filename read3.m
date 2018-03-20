@@ -90,7 +90,7 @@ hi='int64'; rl='float32'; it='int32';
 
 %line 7 read
            hr1 = fread(fid,1,hi);
-           lambda  = fread(fid,nv,rl);  lambda = reshape( lambda,nx,ny,nz); fprintf(['lambda. ']); lambda = permute(lambda, [2 1 3]);
+           lambda  = fread(fid,nv,rl);  lambda = reshape( lambda,nx,ny,nz); fprintf(['lambda, ']); lambda = permute(lambda, [2 1 3]);
            hr2 = fread(fid,1,hi);
    fprintf(['\n']);
 

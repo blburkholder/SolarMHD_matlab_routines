@@ -1,4 +1,4 @@
-function [e_par,j_par,j_perp,ex,ey,ez] = get_j2(nx,ny,nz,res,jx,jy,jz,bx,by,bz,sx,sy,sz,rho)
+function [e_par,j_par,j_perp,ex,ey,ez] = get_j2(nx,ny,nz,res,jx,jy,jz,bx,by,bz,vx,vy,vz)
   
     %parallel electric field
     e_par = zeros(nx,ny,nz);
@@ -41,22 +41,26 @@ function [e_par,j_par,j_perp,ex,ey,ez] = get_j2(nx,ny,nz,res,jx,jy,jz,bx,by,bz,s
     end
 
     %electric field
-    ex = zeros(nx,ny,nz);
-    ey = zeros(nx,ny,nz);
-    ez = zeros(nx,ny,nz);
-    for ix = 2:nx-1
-        for iy = 2:ny-1
-            for iz = 2:nz-1
-%                 ex(ix,iy,iz) = res(ix,iy,iz)*jx(ix,iy,iz) - (sy(ix,iy,iz)*bz(ix,iy,iz) - sz(ix,iy,iz)*by(ix,iy,iz))/rho(ix,iy,iz);
-%                 ey(ix,iy,iz) = res(ix,iy,iz)*jy(ix,iy,iz) - (sz(ix,iy,iz)*bx(ix,iy,iz) - sx(ix,iy,iz)*bz(ix,iy,iz))/rho(ix,iy,iz);
-%                 ez(ix,iy,iz) = res(ix,iy,iz)*jz(ix,iy,iz) - (sx(ix,iy,iz)*by(ix,iy,iz) - sy(ix,iy,iz)*bx(ix,iy,iz))/rho(ix,iy,iz);
-                ex(ix,iy,iz) =  -(sy(ix,iy,iz)*bz(ix,iy,iz) - sz(ix,iy,iz)*by(ix,iy,iz))/rho(ix,iy,iz);
-                ey(ix,iy,iz) =  -(sz(ix,iy,iz)*bx(ix,iy,iz) - sx(ix,iy,iz)*bz(ix,iy,iz))/rho(ix,iy,iz);
-                ez(ix,iy,iz) =  -(sx(ix,iy,iz)*by(ix,iy,iz) - sy(ix,iy,iz)*bx(ix,iy,iz))/rho(ix,iy,iz);
-            end
-        end
-    end
-end
+%     ex = zeros(nx,ny,nz);
+%     ey = zeros(nx,ny,nz);
+%     ez = zeros(nx,ny,nz);
+%     for ix = 2:nx-1
+%         for iy = 2:ny-1
+%             for iz = 2:nz-1
+% %                 ex(ix,iy,iz) = res(ix,iy,iz)*jx(ix,iy,iz) - (sy(ix,iy,iz)*bz(ix,iy,iz) - sz(ix,iy,iz)*by(ix,iy,iz))/rho(ix,iy,iz);
+% %                 ey(ix,iy,iz) = res(ix,iy,iz)*jy(ix,iy,iz) - (sz(ix,iy,iz)*bx(ix,iy,iz) - sx(ix,iy,iz)*bz(ix,iy,iz))/rho(ix,iy,iz);
+% %                 ez(ix,iy,iz) = res(ix,iy,iz)*jz(ix,iy,iz) - (sx(ix,iy,iz)*by(ix,iy,iz) - sy(ix,iy,iz)*bx(ix,iy,iz))/rho(ix,iy,iz);
+%                 ex(ix,iy,iz) =  -(sy(ix,iy,iz)*bz(ix,iy,iz) - sz(ix,iy,iz)*by(ix,iy,iz))/rho(ix,iy,iz);
+%                 ey(ix,iy,iz) =  -(sz(ix,iy,iz)*bx(ix,iy,iz) - sx(ix,iy,iz)*bz(ix,iy,iz))/rho(ix,iy,iz);
+%                 ez(ix,iy,iz) =  -(sx(ix,iy,iz)*by(ix,iy,iz) - sy(ix,iy,iz)*bx(ix,iy,iz))/rho(ix,iy,iz);
+%             end
+%         end
+%     end
+% end
+
+ex = -(vy.*bz - vz.*by);
+ey = -(vz.*bx - vx.*bz);
+ez = -(vx.*by - vy.*bx);
 
 
     

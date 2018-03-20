@@ -3,8 +3,8 @@ nx = length(x);
 ny = length(y);
 
 vx0 = 1.6;
-vy0 = 0.64;
-vz0 = 0.88;
+vy0 = 0.00;
+vz0 = 0.00;
 vw0 = 0.00;
 
 rho0 = 0.072;
@@ -27,22 +27,22 @@ vxprof = zeros(nx,ny);
 vyprof = zeros(nx,ny);      
 vzprof = zeros(nx,ny);  
 
-lx1=-12;
-lx2=12;
-cx1=0;
-cx2=-92;
-ly1=-12;
-ly2=12;
-cy1=10;
-cy2=-56;
-lz1=-14;
-lz2=14;
-cz1=38;
-cz2=-76;
-lw1=22;
-lw2=16;
-cw1=-223;
-cw2=-353; 
+  lx1=-15;
+  lx2=15;
+  cx1=0;
+  cx2=-92;
+  ly1=-12;
+  ly2=12;
+  cy1=10;
+  cy2=-56;
+  lz1=-14;
+  lz2=14;
+  cz1=38;
+  cz2=-76;
+  lw1=22;
+  lw2=16;
+  cw1=-223;
+  cw2=-353; 
 
 for iy = 1:ny
     for ix = 1:nx
@@ -125,7 +125,9 @@ colormap(jet)
 pcolor(x,y,(vy'.^2 + vx'.^2));
 shading interp
 hold on
-h = streamslice(x,y,vx',vy');
+%h = streamslice(x,y,vx',vy');
+[qx,qy] = meshgrid(x,y);
+h = quiver(qx(1:10:end,1:10:end),qy(1:10:end,1:10:end),vx(1:10:end,1:10:end)',vy(1:10:end,1:10:end)');
 set(h,'Color','k')
 daspect([1 1 1])
 
@@ -142,22 +144,23 @@ else
 end
 %dt = 0.1;
 nstep = floor(tf/dt);
+scatter(start_point(:,1),start_point(:,2),10,'k.')
 for k = 1:2
     for i = 1:nstep
 
-        vxx = interp2(x,y,vx,start_point(:,1),start_point(:,2));
-        vyy = interp2(x,y,vy,start_point(:,1),start_point(:,2));
+        vxx = interp2(x,y,vx',start_point(:,1),start_point(:,2));
+        vyy = interp2(x,y,vy',start_point(:,1),start_point(:,2));
 
         start_point(:,1) = start_point(:,1) + vxx*dt;
         start_point(:,2) = start_point(:,2) + vyy*dt;
-
-        scatter(start_point(:,2),start_point(:,1),10,'k.')
+        
+%        scatter(start_point(:,1),start_point(:,2),10,'k.')
         t = t + dt;
     end
     nstep = 1;
     dt = tf - t;
 end
-%scatter(start_point(:,2),start_point(:,1),10,'rp')
+scatter(start_point(:,1),start_point(:,2),10,'w.')
 %title(['tf = ', num2str(t)])
 %daspect([1,1,1])
 xf = reshape(start_point(:,1),[size(xi)])';

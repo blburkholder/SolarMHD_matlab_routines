@@ -9,7 +9,7 @@
 %property which will paint bottom/top boundary
 % prop = log(abs(ftekin)+eps);
 % prop = bx(2:end-1,2:end-1,n);
-prop = potp+potm;
+prop = zfin1;
 
 %quantity to project on field lines (cannot be negative)
 fline_project = abs(sz)./rho;
@@ -19,16 +19,16 @@ fline_project = abs(sz)./rho;
 project_P_onto_fline = 0;
 
 %boundary gradient min & max
-grad_min = 20;
+grad_min = 1;
 grad_max = 50;
 %field line drawing resolution
-reso = 1;
+reso = 41;
 %prop quantity maximum in case of extraneous values
 maxi = 150;
 %how many times to split the boundaries
 slines = 1;
 %where to start flines
-n = nz-1;
+n = 2;
 
 count = 500;
 [row,col] = size(prop);
@@ -51,22 +51,14 @@ for i = 3:row-2
 %             && (dd_pp > grad_min && dd_pp < grad_max) && (dd_pn > grad_min && dd_pn < grad_max)...
 %             && (dd_np > grad_min && dd_np < grad_max) && (dd_nn > grad_min && dd_nn < grad_max)
             count = count + 1;
-            bs(count,1) = xpo(i);
-            bs(count,2) = ypo(j);
+            bs(count,1) = xpo(j);
+            bs(count,2) = ypo(i);
             %bs(count,1) = x(i);
             %bs(count,2) = y(j);
         end
     end
 end
 count
-
-center = [35,30];
-bs(1,:) = center;
-spread = 20;
-for i = 2:count
-    bs(i,:) = center + (2*spread*rand(1,2)-spread);
-end
-
 
 %use this when incorporating bottom & top boundaries
 % load('mentrop5.mat')
@@ -80,34 +72,35 @@ for j = 1:slines
     figure
     hold on
 
-    pcolor(ypo,xpo,prop)
-    %pcolor(y(2:end-1),x(2:end-1),prop)
-    %streamslice(y,x,by(:,:,n),bx(:,:,n))
-    shading interp
-    colormap(jet)
-    colorbar
+%     pcolor(ypo,xpo,prop)
+%     pcolor(y(2:end-1),x(2:end-1),prop)
+%     streamslice(y,x,by(:,:,n),bx(:,:,n))
+%     shading interp
+%     colormap(jet)
+%     colorbar
+%     daspect([1 1 1])
+    scatter(bs((j-1)*floor(count/slines)+1:ceil(j*count/slines),1),...
+        bs((j-1)*floor(count/slines)+1:ceil(j*count/slines),2),[2],'k.')
+%     scatter3(bs((j-1)*floor(count/slines)+1:ceil(j*count/slines),2),...
+%         bs((j-1)*floor(count/slines)+1:ceil(j*count/slines),1),...
+%     z(end-1)*ones(length(bs((j-1)*floor(count/slines)+1:ceil(j*count/slines),1)),1),[2],'k.')
 
-%     scatter(bs((j-1)*floor(count/slines)+1:ceil(j*count/slines),2),...
-%         bs((j-1)*floor(count/slines)+1:ceil(j*count/slines),1),[2],'k.')
-%     scatter3(bs((i-1)*floor(count/slines)+1:ceil(i*count/slines),2),...
-%      bs((i-1)*floor(count/slines)+1:ceil(i*count/slines),1),...
-%     z(end-1)*ones(length(bs((i-1)*floor(count/slines)+1:ceil(i*count/slines),1)),1),[2],'w.')
-
-    plines = perio_stream3(y(2:end-1),x(2:end-1),z(2:end-1),...
-        by(2:end-1,2:end-1,2:end-1),bx(2:end-1,2:end-1,2:end-1),...
-        bz(2:end-1,2:end-1,2:end-1),bs((j-1)*floor(count/slines)+1:reso:ceil(j*count/slines),2),...
-        bs((j-1)*floor(count/slines)+1:reso:ceil(j*count/slines),1),...
+    plines = perio_stream3(x(2:end-1),y(2:end-1),z(2:end-1),...
+        bx(2:end-1,2:end-1,2:end-1),by(2:end-1,2:end-1,2:end-1),...
+        bz(2:end-1,2:end-1,2:end-1),bs((j-1)*floor(count/slines)+1:reso:ceil(j*count/slines),1),...
+        bs((j-1)*floor(count/slines)+1:reso:ceil(j*count/slines),2),...
         z(n)*ones(length(bs((j-1)*floor(count/slines)+1:reso:ceil(j*count/slines),1)),1));
 
     if project_P_onto_fline == 0
-        %streamline(plines);
-        %view(3)
+        h = streamtube(plines,0.2);
+        shading interp
+        view(3)
     else
         b = 0;
         q = 0;
         for i = 1:length(plines)
             if ~isempty(plines{i})
-                q = interp3(y(2:end-1),x(2:end-1),z(2:end-1),fline_project(2:end-1,2:end-1,2:end-1),plines{i}(:,1),plines{i}(:,2),plines{i}(:,3));
+                q = interp3(x(2:end-1),y(2:end-1),z(2:end-1),fline_project(2:end-1,2:end-1,2:end-1),plines{i}(:,1),plines{i}(:,2),plines{i}(:,3));
                 if max(q) > b
                     b = max(q);
                 end

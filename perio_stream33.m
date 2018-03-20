@@ -1,4 +1,4 @@
-function [str] = perio_stream3(x,y,z,bx,by,bz,sx,sy,sz)
+function [str] = perio_stream33(x,y,z,bx,by,bz,sx,sy,sz)
     ds = 0.01;
     pos = stream3(x,y,z,bx,by,bz,sx,sy,sz);
     neg = stream3(x,y,z,-bx,-by,-bz,sx,sy,sz);
@@ -6,14 +6,14 @@ function [str] = perio_stream3(x,y,z,bx,by,bz,sx,sy,sz)
 
     for i = 1:length(pos)
 i
-        if length(pos{i}) > length(neg{i}) && (length(pos{i}) > 3)
+        if length(pos{i}) < length(neg{i}) && (length(pos{i}) > 3)
             %recursing flag (periodic boundary)
             rec = 1;
             %maximum boundaries flag
-            count = 0;
+           count = 0;
             while (rec == 1 )
 %                p2 = [];
-                count = count + 1;
+               count = count + 1;
                 rec = 0;
                 hx = pos{i}(end,1);
                 hy = pos{i}(end,2);
@@ -123,10 +123,10 @@ i
             str{i} = pos{i};
         elseif length(neg{i}) > 3
             rec = 1;
-            count = 0;
+           count = 0;
             while (rec == 1)
                 p2 = [];
-                count = count + 1;
+               count = count + 1;
                 rec = 0;
                 hx = neg{i}(end,1);
                 hy = neg{i}(end,2);
