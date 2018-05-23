@@ -19,8 +19,8 @@ y22 = 71;
 % x22 = 25;
 % y22 = 18;
 % 
-% [jx,jy,jz] = get_j(nx,ny,nz,bx,by,bz,b0x,b0y,b0z,difx,dify,difz);
-% [e_par,j_par,j_perp,ex,ey,ez] = get_j2(nx,ny,nz,res,jx,jy,jz,bx,by,bz,sx./rho,sy./rho,sz./rho);
+%[jx,jy,jz] = get_j(nx,ny,nz,bx,by,bz,b0x,b0y,b0z,difx,dify,difz);
+%[e_par,j_par,j_perp,ex,ey,ez] = get_j2(nx,ny,nz,res,jx,jy,jz,bx,by,bz,sx./rho,sy./rho,sz./rho);
 
 nnz = 130;
 xx1 = x1*ones(length(y2:0.01:y1),1);
@@ -258,6 +258,9 @@ dvax = abs(binterped_x)./sqrt(rho_interped) - VAxb;
 dvay = abs(binterped_y)./sqrt(rho_interped) - VAyb;
 dvaz = abs(binterped_z)./sqrt(rho_interped) - VAzb;
 dva = bis./sqrt(rho_interped) - VAb;
+%dv = sqrt(dvx.^2+dvy.^2+dvz.^2);
+%dva = sqrt(dvax.^2+dvay.^2+dvaz.^2);
+
 
 figure
 plot(mmm,dvx,'r')
@@ -269,7 +272,7 @@ plot(mmm,dvay,'g--')
 plot(mmm,dvaz,'b--')
 plot(mmm,dva,'k.-')
 plot(mmm,dv,'k.-')
-legend('\Delta v_x','\Delta v_y','\Delta v_z','\Delta v_{Ax}','\Delta v_{Ay}','\Delta v_{Az}','\Delta v_A','\Delta |v|')
+legend('\Delta v_x','\Delta v_y','\Delta v_z','\Delta v_{Ax}','\Delta v_{Ay}','\Delta v_{Az}','\Delta |v_A|','\Delta |v|')
 
 n_hat = [bx_m,by_m,bz_m]/sqrt(bx_m^2+by_m^2+bz_m^2);
 dirdir(1,:) = n_hat(1);

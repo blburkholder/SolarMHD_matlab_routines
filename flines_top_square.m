@@ -8,7 +8,7 @@ maxi = 400;
 %where to start flines
 n = nz-1;
 
-count = 75;
+count = 200;
 [row,col] = size(prop);
 bs = zeros(count,2);
 
@@ -42,22 +42,23 @@ prop(prop > maxi) = maxi;
 prop(prop < -maxi) = -maxi;
 %prop = prop/max(max(prop));
 
-%figure
-%hold on
+figure
+hold on
 %pcolor(xpo,ypo,prop)
 %shading interp
 %colormap(gray)
 %colorbar
-%scatter(bs1(:,1),bs1(:,2),[20],'m.')
+scatter(bs1(:,1),bs1(:,2),[30],'m.')
 %scatter(bs2(:,1),bs2(:,2),[30],'r.')
-% scatter(bs3(:,1),bs3(:,2),[20],'g.')
-% scatter(bs4(:,1),bs4(:,2),[20],'b.')
-%daspect([1 1 1])
-%axis([0,x(end-1),0,y(end-1)])
+scatter(bs3(:,1),bs3(:,2),[30],'g.')
+scatter(bs4(:,1),bs4(:,2),[30],'y.')
+daspect([1 1 1])
+axis([0,x(end-1),0,y(end-1)])
+axis off
 
 load('mentrop0_b.mat')
 prop = zfin1;
-maxi = 10
+maxi = 10;
 prop(prop > maxi) = maxi;
 %prop = prop/max(max(prop));
 figure
@@ -66,7 +67,8 @@ pcolor(xpo,ypo,prop)
 shading interp
 %colormap(gray)
 colorbar
-streamslice(x,y,sx(:,:,2)./rho(:,:,2),sy(:,:,2)./rho(:,:,2),'y')
+h = streamslice(x,y,sx(:,:,2)./rho(:,:,2),sy(:,:,2)./rho(:,:,2));
+set(h,'Color',[1 1 1]);
 
 plines1 = perio_stream3(x(2:end-1),y(2:end-1),z(2:end-1),...
     bx(2:end-1,2:end-1,2:end-1),by(2:end-1,2:end-1,2:end-1),...
@@ -133,6 +135,6 @@ h = streamline(plines3);
 set(h,'Color',[0 1 0])
 h = streamline(plines4);
 set(h,'Color',[1 1 0])
-h = streamline(plines44);
-set(h,'Color',[1 1 0])
+% h = streamline(plines44);
+% set(h,'Color',[1 1 0])
 view(3)
