@@ -1,5 +1,5 @@
-prepare3(0)
-prepare3(10)
+%prepare3(0)
+%prepare3(10)
 
 load('mhd0.mat')
 net = zeros(nz-2,1);

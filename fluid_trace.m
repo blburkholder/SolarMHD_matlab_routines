@@ -1,122 +1,98 @@
-% for i = [0,10]
-%   prepare3(i)
-%   mentrop_prepare2(i)
-%   flprepare2(i)
-% end
+%for i = 0:10
+  %prepare3(i)
+  %mentrop_prepare3(i)
+%end
 
-load('flt0.mat')
-load('mhd0.mat')
-load('mentrop0.mat')
+load('mhd0.mat'); load('flt_mentrop0.mat');
 
-%s = 1-bottom 2-middle 3-top
-s = 3;
+zfin11 = zfin1;
+zfin22 = zfin2;
+[ffx1,ffy1] = fix_coords(x,y,xfin1,yfin1);
+[ffx2,ffy2] = fix_coords(x,y,xfin2,yfin2);
+cxt = xpo;
+cyt = ypo;
+czt = zpo;
+xendiff = zeros(size(ffx1));
+yendiff = zeros(size(ffx1));
 
-slice = squeeze(fepo(:,:,s,:));
-coor_x = slice(:,:,1);
-coor_y = slice(:,:,2);
-coor_z = slice(:,:,3);
+for l=10
+  load(['mhd',num2str(l),'.mat']); load(['flt_mentrop',num2str(l),'.mat']);
 
-fx = interp2(xpo,ypo,xfin1,coor_x',coor_y','nearest');
-fy = interp2(xpo,ypo,yfin1,coor_x',coor_y','nearest');
+  [xf1,yf1] = velocity_perturbation(x,y,ffx1,ffy1,time);
+  [xf2,yf2] = velocity_perturbation(x,y,ffx2,ffy2,time);
+  [fx1,fy1] = fix_coords(x,y,xfin1,yfin1);
+  [fx2,fy2] = fix_coords(x,y,xfin2,yfin2);
+  xf1 = xf1';
+  xf2 = xf2';
+  yf1 = yf1';
+  yf2 = yf2';
 
-for i = 1:length(fx)
-    for j = 1:length(fy)
-        if fx(i,j) > x(end)
-            fx(i,j) = x(end) - mod(fx(i,j),x(end));
-            fy(i,j) = y(end) - fy(i,j);
-        end
-        if fx(i,j) < x(1)
-            fx(i,j) = abs(fx(i,j));
-            fy(i,j) = y(end) - fy(i,j);
-        end
-        if fy(i,j) > y(end)
-            fy(i,j) = y(end) - mod(fy(i,j),y(end));
-            fx(i,j) = x(end) - fx(i,j);
-        end
-        if fy(i,j) < y(1)
-            fy(i,j) = abs(fy(i,j));
-            fx(i,j) = x(end) - fx(i,j);
-        end
+  cxt1 = xpo;
+  cyt1 = ypo;
+  czt1 = zpo;
+  for i = 1:length(xendiff(:))
+    if (zfin1(i) < 1 && zfin11(i) < 1)
+      xendiff(i) = xf1(i) - fx1(i);
+      yendiff(i) = yf1(i) - fy1(i);
+    elseif (zfin2(i) < 1 && zfin22(i) < 1)
+      xendiff(i) = xf2(i) - fx2(i);
+      yendiff(i) = yf2(i) - fy2(i);
+    elseif (zfin1(i) < 1 && zfin11(i) > 1 && zfin2(i) < 1)
+      xendiff(i) = xf2(i) - fx2(i);
+      yendiff(i) = yf2(i) - fy2(i);
+    elseif (zfin2(i) < 1 && zfin22(i) > 1 && zfin1(i) < 1)
+      xendiff(i) = xf1(i) - fx1(i);
+      yendiff(i) = yf1(i) - fy1(i);
+    else
+      xendiff(i) = NaN;
+      yendiff(i) = NaN;
     end
+  end
+
+%   figure
+%   dist = sqrt(xendiff(:).^2+yendiff(:).^2);
+%   scatter(cxt1(:),cyt1(:),[],dist(:),'.');
+%   colorbar
+%   title('footpoint dist from ideal evolution')
+%   daspect([1 1 1])
+
+%   figure
+%   scatter(fx1(:),fy1(:),[],'r.')
+%   axis([x(1) x(end) y(1) y(end)])
+%   figure
+%   scatter(xf(:),yf(:),[],'b.')
+%   axis([x(1) x(end) y(1) y(end)])
+  
 end
-
-bzend = interp2(x,y,bz(:,:,2),fx,fy);
-
-%for l = 6
-l=10;
-
-load(['flt',num2str(l),'.mat'])
-load(['mhd',num2str(l),'.mat'])
-load(['mentrop',num2str(l),'.mat'])
-
-fx1 = interp2(xpo,ypo,xfin1,coor_x1',coor_y1','nearest');
-fy1 = interp2(xpo,ypo,yfin1,coor_x1',coor_y1','nearest');
-ftjparl = ftjpar;
-ftjparl(abs(ftjparl) > 16) = 16*sign(ftjparl(abs(ftjparl) > 16));
-c1 = interp2(xpo,ypo,ftjparl,coor_x1',coor_y1','nearest');
-
-for i = 1:length(fx1)
-    for j = 1:length(fy1)
-        if fx1(i,j) > x(end)
-            fx1(i,j) = x(end) - mod(fx1(i,j),x(end));
-            fy1(i,j) = y(end) - fy1(i,j);
-        end
-        if fx1(i,j) < x(1)
-            fx1(i,j) = abs(fx1(i,j));
-            fy1(i,j) = y(end) - fy1(i,j);
-        end
-        if fy1(i,j) > y(end)
-            fy1(i,j) = y(end) - mod(fy1(i,j),y(end));
-            fx1(i,j) = x(end) - fx1(i,j);
-        end
-        if fy1(i,j) < y(1)
-            fy1(i,j) = abs(fy1(i,j));
-            fx1(i,j) = x(end) - fx1(i,j);
-        end
-    end
-end
-
-bzend1 = interp2(x,y,bz(:,:,2),fx1,fy1);
-
-slice1 = squeeze(fepo(:,:,s,:));
-coor_x1 = slice1(:,:,1);
-coor_y1 = slice1(:,:,2);
-coor_z1 = slice1(:,:,3);
-
-cxt1 = coor_x1';
-cyt1 = coor_y1';
-bzendiff = bzend - bzend1;
-
 figure
-h = scatter(cxt1(:),cyt1(:),[],bzendiff(:),'.');
-%pcolor(cxt,cyt,bzendiff)
-%shading interp
+scatter(cxt(:),cyt(:),[],sqrt(xendiff(:).^2+yendiff(:).^2),'.')
 colorbar
-title('closed top')
+daspect([1 1 1])
+title('footpoint distance from ideal evolution')
 
-figure
-surface(cxt,cyt,coor_z1-coor_z)
-shading interp
-colorbar
-title('closed top')
-
-figure
-h = scatter(fx(:),fy(:),'.');
-hold on
-k = scatter(fx1(:),fy1(:),'.');
-title('closed top')
-
-figure
-scatter(cxt1(:),cyt1(:),[],c1(:),'.')
-colorbar
-
-bzendiff(abs(c1) < 7) = 0;
-bzendiff(abs(bzendiff)> 10) = 10*sign(bzendiff(abs(bzendiff) > 10));
-figure
-scatter(cxt1(:),cyt1(:),[],bzendiff(:),'.')
-colorbar
-
-
-
-
-
+% figure
+% scatter(fx(:),fy(:),'.');
+% hold on
+% k = scatter(fx1(:),fy1(:),'.');
+% reso = 10;
+% [xx,yy] = meshgrid(x(1:reso:end),y(1:reso:end));
+% h = quiver(xx,yy,sx(1:reso:end,1:reso:end,1)./rho(1:reso:end,1:reso:end,1),...
+%     sy(1:reso:end,1:reso:end,1)./rho(1:reso:end,1:reso:end,1));
+% set(h,'Color','k')
+% axis([0 x(end) 0 y(end)])
+% daspect([1 1 1])
+% title('photospheric footpoint open flux')
+% 
+% figure
+% scatter(fx(:),fy(:),'.');
+% hold on
+% k = scatter(xf(:),yf(:),'.');
+% reso = 10;
+% [xx,yy] = meshgrid(x(1:reso:end),y(1:reso:end));
+% h = quiver(xx,yy,sx(1:reso:end,1:reso:end,1)./rho(1:reso:end,1:reso:end,1),...
+%     sy(1:reso:end,1:reso:end,1)./rho(1:reso:end,1:reso:end,1));
+% set(h,'Color','k')
+% axis([0 x(end) 0 y(end)])
+% daspect([1 1 1])
+% title('photospheric footpoint fluid trace')
+% 
