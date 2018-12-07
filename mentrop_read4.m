@@ -1,6 +1,6 @@
 function [time]=mentrop_read4(file_number);
 global pox poy poz xpo ypo zpo zp0 zp1 potp potm pgam
-global ftlength ftvol ftmass ftjpar ftjperp ftemag ftekin
+global ftlength ftvol ftmass ftjpar ftjperp ftemag ftekin ftepar
 global ftethe pmaxft pminft zmaxft zminft bminft bbaseft
 global xfin1 yfin1 zfin1 xfin2 yfin2 zfin2 bzfin1 bzfin2 dist1 dist2
 
@@ -150,6 +150,10 @@ fprintf(['pox=',num2str(pox,'%4d'),' poy=',num2str(poy,'%4d'),' poz=',num2str(po
 
    hr1 = fread(fid,1,hi);
      dist2 = fread(fid,pox*poy,rl); dist2 = reshape(dist2,pox,poy);
+   hr2 = fread(fid,1,hi);
+
+   hr1 = fread(fid,1,hi);
+     ftepar = fread(fid,pox*poy,rl); ftepar = reshape(ftepar,pox,poy);
    hr2 = fread(fid,1,hi);
 
    fprintf(['\n']);

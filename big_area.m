@@ -16,7 +16,7 @@ nnn = [mean(nnnn(:,1)),mean(nnnn(:,2)),mean(nnnn(:,3))];
 
 [bsx,bsy,bsz] = meshgrid(nnn(2),y,z); 
 
-nflines = 3;
+nflines = 4;
 ss = 0.9;
 vvvec = (-ss:2*ss/nflines:ss);
 [xx1,yy1,zz1] = meshgrid(nnn(2)+vvvec,nnn(1)+vvvec,nnn(3)+vvvec);
@@ -38,7 +38,7 @@ for i = 1:length(plines1)
     ep2(i) = interp3(wx,y,z,(wvx.^2+wvy.^2+wvz.^2)./wrho,xyzfin(1),xyzfin(2),xyzfin(3)); 
 end
 
-colormap(parula)
+colormap(jet)
 mep2 = max(ep2);
 cm = colormap;
 
@@ -49,8 +49,6 @@ for i = 1:length(plines1)
 %     h = streamline(plines2(i));
 %     set(h,'Color',cm(jgz,:))
 end
-
-colormap(parula)
 axis off
 
 % xyzfin = zeros(length(plines1),3);

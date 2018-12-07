@@ -8,9 +8,12 @@ maxi = 400;
 %where to start flines
 n = nz-1;
 
-count = 200;
+count = 100;
 [row,col] = size(prop);
-bs = zeros(count,2);
+bs1 = zeros(count,2);
+bs2 = zeros(count,2);
+bs3 = zeros(count,2);
+bs4 = zeros(count,2);
 
 center1 = [50,30];
 center2 = [7,35];
@@ -124,7 +127,6 @@ plines4 = stream3(x(2:end-1),y(2:end-1),z(2:end-1),...
 
 daspect([1 1 1])
 
-colormap(bone)
 axis off
 colorbar off
 %axis([0,x(end-1),0,y(end-1)])
@@ -135,6 +137,27 @@ h = streamline(plines3);
 set(h,'Color',[0 1 0])
 h = streamline(plines4);
 set(h,'Color',[1 1 0])
+
+scatter3(bs1(:,1),bs1(:,2),z(n)*ones(size(bs1(:,2))),'k.')
+scatter3(bs3(:,1),bs3(:,2),z(n)*ones(size(bs3(:,2))),'k.')
+scatter3(bs4(:,1),bs4(:,2),z(n)*ones(size(bs4(:,2))),'k.')
+
+plot3([center1(1)-xspread1 center1(1)-xspread1],[center1(2)-yspread1 center1(2)+yspread1],[z(n) z(n)],'m','LineWidth',2)
+plot3([center1(1)+xspread1 center1(1)+xspread1],[center1(2)-yspread1 center1(2)+yspread1],[z(n) z(n)],'m','LineWidth',2)
+plot3([center1(1)-xspread1 center1(1)+xspread1],[center1(2)+yspread1 center1(2)+yspread1],[z(n) z(n)],'m','LineWidth',2)
+plot3([center1(1)-xspread1 center1(1)+xspread1],[center1(2)-yspread1 center1(2)-yspread1],[z(n) z(n)],'m','LineWidth',2)
+
+plot3([center3(1)-xspread3 center3(1)-xspread3],[center3(2)-yspread3 center3(2)+yspread3],[z(n) z(n)],'g','LineWidth',2)
+plot3([center3(1)+xspread3 center3(1)+xspread3],[center3(2)-yspread3 center3(2)+yspread3],[z(n) z(n)],'g','LineWidth',2)
+plot3([center3(1)-xspread3 center3(1)+xspread3],[center3(2)+yspread3 center3(2)+yspread3],[z(n) z(n)],'g','LineWidth',2)
+plot3([center3(1)-xspread3 center3(1)+xspread3],[center3(2)-yspread3 center3(2)-yspread3],[z(n) z(n)],'g','LineWidth',2)
+
+plot3([center4(1)-xspread4 center4(1)-xspread4],[center4(2)-yspread4 center4(2)+yspread4],[z(n) z(n)],'y','LineWidth',2)
+plot3([center4(1)+xspread4 center4(1)+xspread4],[center4(2)-yspread4 center4(2)+yspread4],[z(n) z(n)],'y','LineWidth',2)
+plot3([center4(1)-xspread4 center4(1)+xspread4],[center4(2)+yspread4 center4(2)+yspread4],[z(n) z(n)],'y','LineWidth',2)
+plot3([center4(1)-xspread4 center4(1)+xspread4],[center4(2)-yspread4 center4(2)-yspread4],[z(n) z(n)],'y','LineWidth',2)
+
+
 % h = streamline(plines44);
 % set(h,'Color',[1 1 0])
 view(3)
