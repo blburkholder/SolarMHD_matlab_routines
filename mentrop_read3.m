@@ -129,9 +129,9 @@ fprintf(['pox=',num2str(pox,'%4d'),' poy=',num2str(poy,'%4d'),' poz=',num2str(po
      dist1 = fread(fid,pox*poy,rl); dist1 = reshape(dist1,pox,poy)';
    hr2 = fread(fid,1,hi);
 
-%    hr1 = fread(fid,1,hi);
-%      ftepar = fread(fid,pox*poy,rl); ftepar = reshape(ftepar,pox,poy);
-%    hr2 = fread(fid,1,hi);
+    hr1 = fread(fid,1,hi);
+      ftepar = fread(fid,pox*poy,rl); ftepar = reshape(ftepar,pox,poy)';
+    hr2 = fread(fid,1,hi);
 
    fprintf(['\n']);
    fclose(fid); 

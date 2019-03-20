@@ -26,7 +26,7 @@ for i = 1:length(nus)
     %     zz = z(2:6);
     %     xx = x(194:200); 
     %     yy = y(102:107);
-          figure
+     %     figure
 %         plines = streamline(stream3(xx,yy,zz,bx(102:107,194:200,2:6),...
 %             by(102:107,194:200,2:6),bz(102:107,194:200,2:6),spfl(:,1),spfl(:,2),spfl(:,3)));
 %         hold on
@@ -38,19 +38,19 @@ for i = 1:length(nus)
     %     isosurface(xx,yy,zz,e_ll(102:107,194:200,2:6),0.05)
     %     isosurface(xx,yy,zz,e_ll(102:107,194:200,2:6),-0.05)
 
-    plines = streamline(stream3(x(2:end-1),y(2:end-1),z(2:end-1),bx(2:end-1,2:end-1,2:end-1),...
-        by(2:end-1,2:end-1,2:end-1),bz(2:end-1,2:end-1,2:end-1),spfl(:,2),spfl(:,1),spfl(:,3),[0.01,1000]));
-    hold on
-    flines = streamline(stream3(x(2:end-1),y(2:end-1),z(2:end-1),-bx(2:end-1,2:end-1,2:end-1),...
-        -by(2:end-1,2:end-1,2:end-1),-bz(2:end-1,2:end-1,2:end-1),spfl(:,2),spfl(:,1),spfl(:,3),[0.01,1000]));
-    set(flines,'Color','r');
+    %plines = streamline(stream3(x(2:end-1),y(2:end-1),z(2:end-1),bx(2:end-1,2:end-1,2:end-1),...
+    %    by(2:end-1,2:end-1,2:end-1),bz(2:end-1,2:end-1,2:end-1),spfl(:,2),spfl(:,1),spfl(:,3),[0.01,1000]));
+    %hold on
+    %flines = streamline(stream3(x(2:end-1),y(2:end-1),z(2:end-1),-bx(2:end-1,2:end-1,2:end-1),...
+    %    -by(2:end-1,2:end-1,2:end-1),-bz(2:end-1,2:end-1,2:end-1),spfl(:,2),spfl(:,1),spfl(:,3),[0.01,1000]));
+    %set(flines,'Color','r');
 
-        %plines = streamline(stream3(x(2:end-1),y(2:end-1),z(2:end-1),bx(2:end-1,2:end-1,2:end-1),...
-        %    by(2:end-1,2:end-1,2:end-1),bz(2:end-1,2:end-1,2:end-1),spfl(:,2),spfl(:,1),spfl(:,3)));
-        %hold on
-        %flines = streamline(stream3(x(2:end-1),y(2:end-1),z(2:end-1),-bx(2:end-1,2:end-1,2:end-1),...
-        %    -by(2:end-1,2:end-1,2:end-1),-bz(2:end-1,2:end-1,2:end-1),spfl(:,2),spfl(:,1),spfl(:,3)));
-        %set(flines,'Color','r');
+        plines = streamline(stream3(x(2:end-1),y(2:end-1),z(2:end-1),bx(2:end-1,2:end-1,2:end-1),...
+           by(2:end-1,2:end-1,2:end-1),bz(2:end-1,2:end-1,2:end-1),spfl(:,2),spfl(:,1),spfl(:,3)));
+        hold on
+        flines = streamline(stream3(x(2:end-1),y(2:end-1),z(2:end-1),-bx(2:end-1,2:end-1,2:end-1),...
+           -by(2:end-1,2:end-1,2:end-1),-bz(2:end-1,2:end-1,2:end-1),spfl(:,2),spfl(:,1),spfl(:,3)));
+        set(flines,'Color','r');
     end
 end
 %     isosurface(x(2:end-1),y(2:end-1),z(2:end-1),rho(2:end-1,2:end-1,2:end-1),0.1)

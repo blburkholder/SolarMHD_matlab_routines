@@ -1,4 +1,4 @@
-function [time]=mentrop_read4(file_number);
+function [time]=mentrop_read_fluelt(file_number);
 global pox poy poz xpo ypo zpo zp0 zp1 potp potm pgam
 global ftlength ftvol ftmass ftjpar ftjperp ftemag ftekin ftepar
 global ftethe pmaxft pminft zmaxft zminft bminft bbaseft
