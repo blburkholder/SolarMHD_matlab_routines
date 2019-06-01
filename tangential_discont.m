@@ -1,5 +1,5 @@
 function [brotated_x,brotated_y,brotated_z,jinterped_x,jinterped_y,jinterped_z,epar_interped,mmm,ppp,nnn,dirdir] =...
-    tangential_discont(x,y,z,nx,ny,nz,bx,by,bz,b0x,b0y,b0z,difx,dify,difz,sx,sy,sz,res,rho,p,time,txy,tyz,nnz,bl)
+    tangential_discont(x,y,z,nx,ny,nz,bx,by,bz,b0x,b0y,b0z,difx,dify,difz,sx,sy,sz,res,rho,p,time,txy,tyz,nnz,bl,rl)
     tx1 = txy(1);    ty1 = txy(2);    tx2 = txy(3);    ty2 = txy(4);    tx11 = txy(5);    ty11 = txy(6);    tx22 = txy(7);    ty22 = txy(8);
 
     %%%%%%%calculate current density and fac density for simulation volume
@@ -28,7 +28,7 @@ function [brotated_x,brotated_y,brotated_z,jinterped_x,jinterped_y,jinterped_z,e
 
     %find line connecting maximum current along 2 vertical lines to define a
     %normal to the boundary in the 2D x-y plane 
-    mmm = (tx_max1-3):0.01:(tx_max2+3);
+    mmm = (tx_max1-rl):0.01:(tx_max2+rl);
     %mmm = tx_max1:0.01:tx_max2;
     mslope1 = (ty_max1 - ty_max2)/(tx_max1 - tx_max2); 
     lll = mslope1*((mmm) - tx_max1) + ty_max1;
@@ -45,7 +45,8 @@ function [brotated_x,brotated_y,brotated_z,jinterped_x,jinterped_y,jinterped_z,e
     [xxx,yyy] = meshgrid(x,y);
 
     figure
-    pcolor(x,y,e_par(:,:,nnz)')
+%    pcolor(x,y,e_par(:,:,nnz)')
+    pcolor(x,y,sqrt((sx(:,:,nnz)./rho(:,:,nnz)).^2+(sy(:,:,nnz)./rho(:,:,nnz)).^2)')
     shading interp
     daspect([1 1 1])
     shading interp
@@ -150,11 +151,11 @@ function [brotated_x,brotated_y,brotated_z,jinterped_x,jinterped_y,jinterped_z,e
     z_one = z(nnz) - risetot/2;
     z_two = z(nnz) + risetot/2;
 
-    if z_one == z_two
+    %if z_one == z_two
         nnn = z(nnz)*ones(size(mmm));
-    else
-        nnn = z_one:-(z_one-z_two)/(length(mmm)-1):z_two;
-    end
+    %else
+    %    nnn = z_one:-(z_one-z_two)/(length(mmm)-1):z_two;
+    %end
 
     dirdir_g = [mmm(1)-mmm(end),ppp(1)-ppp(end),nnn(1)-nnn(end)];
     dirdir_g = dirdir_g/norm(dirdir_g);
@@ -200,7 +201,7 @@ function [brotated_x,brotated_y,brotated_z,jinterped_x,jinterped_y,jinterped_z,e
         jinterped_z.*binterped_z)./(bis.*jis);
 
     %index max j
-    imjdbs = find(abs(epar_interped) == max(abs(epar_interped)));
+    imjdbs = find((epar_interped) == max((epar_interped)));
     %%grid cells away from "middle" to perform averages
     u_jdb = imjdbs+bl;
     d_jdb = imjdbs-bl;

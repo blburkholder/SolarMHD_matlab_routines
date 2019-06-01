@@ -1,6 +1,6 @@
-  load('mentrop10.mat')
-  ftepar(ftepar > 0.3) = 0.3;
-  ftepar(ftepar < -0.02) = -0.02;
+  load('mentrop6.mat')
+  ftepar(ftepar > 0.4) = 0.4;
+  ftepar(ftepar < -0.05) = -0.05;
   %ftepar(ftepar == 0) = 0.001;
   figure
   %scatter(xpo(:),ypo(:),[],ftepar(:),'.')
