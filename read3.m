@@ -2,6 +2,7 @@ function [time]=read3(file_number);
 global nx ny nz  x y z difx dify difz
 global bx by bz b0x b0y b0z sx sy sz rho u prof res lambda
 
+%fnh='reconnection_movie_3D/magtap';  fnt=num2str(file_number);
 fnh='magtap';  fnt=num2str(file_number);
 for i=1:5
 fn=[fnh,fnt];

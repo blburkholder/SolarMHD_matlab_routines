@@ -140,15 +140,15 @@ axis([ppp(fart(1)) ppp(fart(end)) 80 90])
 %set(htitle,'String','maxima')
 xlabel('x')
 
-yu1 = 150;
-yu2 = 550;
+yu1 = 325;
+yu2 = 700;
 b1 = abs(brotz(yu1));
 b2 = abs(brotz(yu2));
 rho1 = rho_interped(yu1);
 rho2 = rho_interped(yu2);
 vout = sqrt(b1*b2*(b1+b2)/(rho1*b2+rho2*b1));
 
-% plot([ppp(yu1) ppp(yu1)],[-2 4])
-% plot([ppp(yu2) ppp(yu2)],[-2 4])
+plot([ppp(yu1) ppp(yu1)],[-0.5 2])
+plot([ppp(yu2) ppp(yu2)],[-0.5 2])
 
 E_rate = 0.1*b1*b2/(b1+b2)*vout

@@ -4,6 +4,7 @@ global ftlength ftvol ftmass ftjpar ftjperp ftemag ftekin ftepar
 global ftethe pmaxft pminft zmaxft zminft bminft bbaseft
 global xfin1 yfin1 zfin1 xfin2 yfin2 zfin2 bzfin1 bzfin2 dist1 dist2
 
+%fnh='reconnection_movie_3D/mentrop';  fnt=num2str(file_number);
 fnh='mentrop';  fnt=num2str(file_number);
 for i=1:5
 fn=[fnh,fnt];

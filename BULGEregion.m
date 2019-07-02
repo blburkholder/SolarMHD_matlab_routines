@@ -19,13 +19,16 @@ for kkk = 1
 % 
     figure; hold on
     pcolor(x,y,sqrt(jx.^2+jy.^2+jz.^2))
-    plot([x(127) x(627)],[y(upperbulgecut) y(upperbulgecut)],'w--','LineWidth',2)
-    plot([x(127) x(627)],[y(lowerbulgecut) y(lowerbulgecut)],'w-','LineWidth',2)
-    plot([x(127) x(627)],[y(jetcut) y(jetcut)],'w:','LineWidth',2)
+%     plot([x(127) x(627)],[y(upperbulgecut) y(upperbulgecut)],'w--','LineWidth',2)
+%     plot([x(127) x(627)],[y(lowerbulgecut) y(lowerbulgecut)],'w-','LineWidth',2)
+%     plot([x(127) x(627)],[y(jetcut) y(jetcut)],'w:','LineWidth',2)
+    plot([x(127) x(627)],[y(upperbulgecut) y(upperbulgecut)],'r','LineWidth',2)
+    plot([x(127) x(627)],[y(lowerbulgecut) y(lowerbulgecut)],'g','LineWidth',2)
+    plot([x(127) x(627)],[y(jetcut) y(jetcut)],'b','LineWidth',2)
     shading interp
     %[xx,yy] = meshgrid(x,y);
-    h = streamslice(x,y,bx,by);
-    set(h,'Color','k')
+    h = streamslice(x,y,bx,by,0.5);
+    set(h,'Color','w')
     daspect([1 1 1])
     title('|j| and magnetic field')
     xlabel('x')
@@ -33,6 +36,7 @@ for kkk = 1
     colorbar
     axis([x(1) x(end) y(1) y(end)])
     caxis([0 2])
+    colormap(hot)
 % 
     figure; hold on
     pcolor(x,y,p)
@@ -50,7 +54,7 @@ for kkk = 1
 
     skinterval = 127:627;
    figure
-   linespeccers = {'k:','k-','k--'};
+   linespeccers = {'b','g','r'};
 %     if kkk == 4
 %         linespeccers = {'r-','r-','r-'};
 %     elseif kkk == 5
@@ -137,34 +141,40 @@ for kkk = 1
 
 
         subplot(3,2,1); hold on
-        plot(x(skinterval),by(cutline,skinterval),linespeccers{hh})
+        plot(x(skinterval),by(cutline,skinterval),linespeccers{hh},'LineWidth',2)
         title('B_y')
+        set(gca,'FontSize',16)
 
          subplot(3,2,2); hold on
 %         plot(x(skinterval),abs(by(cutline,skinterval))./sqrt(rho(cutline,skinterval)),linespeccers{hh})
 %         title('v_{Ay}')
         rotation = 180*acos((bz(cutline,1)*bz(cutline,:)+by(cutline,1)*by(cutline,:))./(sqrt(bz(cutline,1)^2+by(cutline,1)^2)*sqrt(bz(cutline,:).^2+by(cutline,:).^2)))/pi;
         subplot(3,2,2); hold on
-        plot(x(skinterval),rotation(skinterval),linespeccers{hh})
+        plot(x(skinterval),rotation(skinterval),linespeccers{hh},'LineWidth',2)
         title('rotation')
+        set(gca,'FontSize',16)
 
         subplot(3,2,3); hold on
-        plot(x(skinterval),vy(cutline,skinterval),linespeccers{hh})
+        plot(x(skinterval),vy(cutline,skinterval),linespeccers{hh},'LineWidth',2)
         title('v_y')
+        set(gca,'FontSize',16)
 
         subplot(3,2,4); hold on
-        plot(x(skinterval),rho(cutline,skinterval),linespeccers{hh})
+        plot(x(skinterval),rho(cutline,skinterval),linespeccers{hh},'LineWidth',2)
         title('density')
+        set(gca,'FontSize',16)
 
         subplot(3,2,5); hold on
-        plot(x(skinterval),p(cutline,skinterval),linespeccers{hh})
+        plot(x(skinterval),p(cutline,skinterval),linespeccers{hh},'LineWidth',2)
         title('thermal pressure')
         xlabel('x')
+        set(gca,'FontSize',16)
 
         subplot(3,2,6); hold on
-        plot(x(skinterval),p(cutline,skinterval)./rho(cutline,skinterval).^(5/3),linespeccers{hh})
+        plot(x(skinterval),p(cutline,skinterval)./rho(cutline,skinterval).^(5/3),linespeccers{hh},'LineWidth',2)
         title('entropy')
         xlabel('x')
+        set(gca,'FontSize',16)
 
         [inds1,inds2] = twoDsimulation_walen(x(skinterval),bx(cutline,skinterval),by(cutline,skinterval),...
             vx(cutline,skinterval),vy(cutline,skinterval),...
@@ -173,7 +183,7 @@ for kkk = 1
 
         subplot(3,2,3)
         for j = 1:length(inds1)
-            plot(x((126+inds1(j)):(126+inds2(j))),vy(cutline,(126+inds1(j)):(126+inds2(j))),'y','LineWidth',2)
+            plot(x((126+inds1(j)):(126+inds2(j))),vy(cutline,(126+inds1(j)):(126+inds2(j))),'y','LineWidth',4)
         end    
     end
 end

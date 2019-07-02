@@ -1,7 +1,9 @@
-%   for i = 5
-%   prepare3(i)
-%    mentrop_prepare_fluelt(i)
-%   end
+%Sun/solar_simulation_data/Bright_point/nz153/BP_linesymstir_0_net_run2/extend-o-run/
+
+   for i = [6]
+   prepare3(i)
+    mentrop_prepare_fluelt(i)
+   end
 l = 0;
   load(['mhd',num2str(l),'.mat']); load(['flt_mentrop',num2str(l),'.mat']);
 % wy = [-flipud(y(4:end));y];
@@ -213,7 +215,8 @@ sum(abs(bzflip*(x(2)-x(1))*(y(2)-y(1))))/tot
 % bz_top = interp3(x,y,z,bz,cxt,cyt,czt);
 % open = abs(bz_top) > abs(by_top) & abs(bz_top) > abs(bx_top);
 
-load('mhd6.mat'); figure
+load(['mhd',num2str(l),'.mat']);
+figure
 cond1 = yend_t0 > 55 & tubetag1 ~= tubetag2 & xend_t0 < 60 & xend_t0 > 20;
 scatter(xend_t0(yend_t0 > 70 & cond1),yend_t0(cond1 & yend_t0 > 70),'g.');
 hold on
